@@ -1,0 +1,71 @@
+{
+  "width": 1774,
+  "height": 887,
+  "maps": [
+    {
+      "id": "underground",
+      "name": "蘑菇矿坑",
+      "file": "maps/underground.png",
+      "source": "C:\\Users\\admin\\Documents\\ChatGPT\\个人档案 2\\pixel-brawl\\四主题地图-本次素材版-20261104\\01-蘑菇矿坑-地图-v2.png",
+      "width": 1774,
+      "height": 887,
+      "sha256": "84b39ef510ab3a17a0e8812460dcb6b472c056b27b99b1c072e57c3f06e88de8"
+    },
+    {
+      "id": "village",
+      "name": "歪歪村",
+      "file": "maps/village.png",
+      "source": "C:\\Users\\admin\\Documents\\ChatGPT\\个人档案 2\\pixel-brawl\\四主题地图-本次素材版-20261104\\02-歪歪村-地图-v2-天空修正.png",
+      "width": 1774,
+      "height": 887,
+      "sha256": "19813a53d5d85a4d93f4b898362727d91a34ed764df0b8c4c4e86eecb95d6370"
+    },
+    {
+      "id": "undersea",
+      "name": "泡泡避难所",
+      "file": "maps/undersea.png",
+      "source": "C:\\Users\\admin\\Documents\\ChatGPT\\个人档案 2\\pixel-brawl\\四主题地图-本次素材版-20261104\\03-泡泡避难所-地图-v2.png",
+      "width": 1774,
+      "height": 887,
+      "sha256": "0ad60b83c56994a744f81a4b78101b2c70786dffc76e35e241905e43641001db"
+    },
+    {
+      "id": "forest",
+      "name": "歪树森林",
+      "file": "maps/forest.png",
+      "source": "C:\\Users\\admin\\Documents\\ChatGPT\\个人档案 2\\pixel-brawl\\四主题地图-本次素材版-20261104\\04-歪树森林-地图.png",
+      "width": 1774,
+      "height": 887,
+      "sha256": "826f73f76377b18d03b4c3e7bb3919a278aaf39beaaddcc526126475f9c29793"
+    }
+  ],
+  "sources": [
+    {
+      "file": "rexparticlesalongboundsplugin.min.js",
+      "url": "https://github.com/rexrainbow/phaser3-rex-notes/blob/3910746e4699f779b53a9ef4fc7285a902f487c9/dist/rexparticlesalongboundsplugin.min.js",
+      "git_blob_sha1": "fa6ef0d2509ce9cc39f58230b1f615a7866488f5",
+      "sha256": "aabe5a05fa670e1bddec7ea1a034cf4f00e7e84c71b8f4a4c470bc3b7705026b"
+    },
+    {
+      "file": "REX-LICENSE.txt",
+      "url": "https://github.com/rexrainbow/phaser3-rex-notes/blob/3910746e4699f779b53a9ef4fc7285a902f487c9/LICENSE",
+      "git_blob_sha1": "f62f6851cd3bdb572b5ae2159c6fb442ad2f0aec",
+      "sha256": "5d11495d3e2ec358f858505f09890230a80fdf4e9c115a97731e1fa83cd3cf6d"
+    },
+    {
+      "file": "PHASER-LICENSE.txt",
+      "url": "https://github.com/phaserjs/phaser/blob/02d8931b626d9764c133cbb3fbf99966c03c757c/LICENSE.md",
+      "git_blob_sha1": "33aa21b2adf01a08ca6acb55ddaf8fd2dc4b3368",
+      "sha256": "c3a9ba7e38d4ef33dccf5fdd1046655c63df06714f84776118fe406f43db5cf2"
+    },
+    {
+      "file": "phaser-4.2.1.min.js",
+      "version": "4.2.1",
+      "source": "existing pinned npm dependency phaser@4.2.1",
+      "url": "https://github.com/phaserjs/phaser",
+      "sha256": "66348b1b5141e49b7d5ebbe688cddcb502eab1cb00f21c538686a5b2c5abe4de"
+    }
+  ],
+  "rex_commit": "3910746e4699f779b53a9ef4fc7285a902f487c9",
+  "notes": "Map PNG bytes copied unchanged; runtime particle overlay only."
+}

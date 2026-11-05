@@ -1,0 +1,45 @@
+{
+  "physics": {
+    "moveSpeed": 265,
+    "gravity": 1720,
+    "jumpSpeed": 770
+  },
+  "maps": [
+    {
+      "map": "underground",
+      "relativeAssetsValid": true,
+      "uniqueObjectIds": true,
+      "modeSpawnChecks": true,
+      "dropWavesChecked": 300,
+      "physicsReachable": 15,
+      "platforms": 15
+    },
+    {
+      "map": "village",
+      "relativeAssetsValid": true,
+      "uniqueObjectIds": true,
+      "modeSpawnChecks": true,
+      "dropWavesChecked": 300,
+      "physicsReachable": 15,
+      "platforms": 15
+    },
+    {
+      "map": "undersea",
+      "relativeAssetsValid": true,
+      "uniqueObjectIds": true,
+      "modeSpawnChecks": true,
+      "dropWavesChecked": 300,
+      "physicsReachable": 15,
+      "platforms": 15
+    },
+    {
+      "map": "forest",
+      "relativeAssetsValid": true,
+      "uniqueObjectIds": true,
+      "modeSpawnChecks": true,
+      "dropWavesChecked": 300,
+      "physicsReachable": 15,
+      "platforms": 15
+    }
+  ]
+}

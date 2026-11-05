@@ -1,0 +1,38 @@
+{
+  "name": "pixel-brawl",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "绷住俱乐部：支持四人房间联机的像素派对格斗原型。",
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "scripts": {
+    "check:tools": "node ../verify-tools.mjs",
+    "dev": "vite --host 0.0.0.0",
+    "server": "tsx server/index.ts",
+    "start": "tsx server/index.ts",
+    "check": "tsc --noEmit",
+    "build": "tsc --noEmit && vite build",
+    "test": "tsx --test tests/*.test.ts",
+    "play": "npm run build && npm start"
+  },
+  "dependencies": {
+    "phaser": "4.2.1",
+    "phaser4-rex-plugins": "4.2.0",
+    "@colyseus/sdk": "0.18.6",
+    "@colyseus/core": "0.18.23",
+    "@colyseus/ws-transport": "0.18.4",
+    "@colyseus/schema": "5.0.42",
+    "@capacitor/core": "8.5.3",
+    "@capacitor/android": "8.5.3",
+    "@capacitor/ios": "8.5.3"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "8.5.3",
+    "typescript": "7.0.2",
+    "vite": "8.3.5",
+    "tsx": "4.23.15",
+    "@types/node": "26.6.5"
+  }
+}

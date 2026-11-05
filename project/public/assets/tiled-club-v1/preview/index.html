@@ -1,0 +1,12 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>四张地图试玩 · 绷住俱乐部</title><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="layout.css"></head>
+<body>
+<main>
+ <header><a class="brand" href="../previews/contact-sheet.png" target="_blank">绷住俱乐部<span>地图工坊</span></a><span class="edition">四张地图 · Tiled 可编辑</span></header>
+ <nav id="maps" aria-label="选择地图"></nav>
+ <div class="toolbar"><div><h1 id="title">正在加载地图</h1><p id="subtitle">读取 Tiled 图块与对象层</p></div><div class="options"><label>模式 <select id="mode"><option value="ffa">4人混战</option><option value="2v2">2v2 组队</option><option value="1v1">1v1 对决</option></select></label><button id="overview" aria-pressed="false">查看全图</button><button id="markers" aria-pressed="false">玩法标记</button><button id="respawn">回到出生点</button></div></div>
+ <section class="stage" aria-label="地图试玩区域"><canvas id="game" width="960" height="540" tabindex="0" aria-label="地图试玩：A和D移动，空格跳跃，S加空格下落，K突进，F拾取"></canvas><output id="notice" aria-live="polite">正在准备地图…</output><div class="touch" aria-label="触屏操作"><div><button data-key="KeyA" aria-label="向左">◀</button><button data-key="KeyD" aria-label="向右">▶</button></div><div><button data-key="KeyS">下</button><button data-key="KeyF">拾取</button><button data-key="KeyK">突进</button><button data-key="Space">跳跃</button></div></div></section>
+ <footer><p><kbd>A</kbd><kbd>D</kbd> 移动　<kbd>空格</kbd> 二段跳　<kbd>S</kbd>＋<kbd>空格</kbd> 下落　<kbd>K</kbd> 突进　<kbd>F</kbd> 拾取</p><p id="details">地图路线试玩，包含碰撞、镜头与定时空投。</p><a id="fullimage" target="_blank">打开地图全景</a></footer>
+</main><script type="module" src="viewer.mjs"></script>
+</body></html>

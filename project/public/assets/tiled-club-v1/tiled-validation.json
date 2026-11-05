@@ -1,0 +1,49 @@
+{
+  "tiledVersion": "1.12.2",
+  "maps": [
+    {
+      "map": "underground",
+      "tiledRead": true,
+      "tmxExport": true,
+      "jsonRoundTrip": true,
+      "geometryPreserved": true,
+      "nativeRasterSize": [
+        2048,
+        1024
+      ]
+    },
+    {
+      "map": "village",
+      "tiledRead": true,
+      "tmxExport": true,
+      "jsonRoundTrip": true,
+      "geometryPreserved": true,
+      "nativeRasterSize": [
+        2048,
+        1024
+      ]
+    },
+    {
+      "map": "undersea",
+      "tiledRead": true,
+      "tmxExport": true,
+      "jsonRoundTrip": true,
+      "geometryPreserved": true,
+      "nativeRasterSize": [
+        2048,
+        1024
+      ]
+    },
+    {
+      "map": "forest",
+      "tiledRead": true,
+      "tmxExport": true,
+      "jsonRoundTrip": true,
+      "geometryPreserved": true,
+      "nativeRasterSize": [
+        2048,
+        1024
+      ]
+    }
+  ]
+}

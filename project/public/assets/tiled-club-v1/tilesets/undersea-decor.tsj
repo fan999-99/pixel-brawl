@@ -1,0 +1,113 @@
+{
+  "type": "tileset",
+  "version": "1.10",
+  "tiledversion": "1.12.2",
+  "name": "undersea-decor",
+  "tilewidth": 288,
+  "tileheight": 208,
+  "columns": 0,
+  "tilecount": 5,
+  "grid": {
+    "orientation": "orthogonal",
+    "width": 16,
+    "height": 16
+  },
+  "objectalignment": "bottomleft",
+  "tiles": [
+    {
+      "id": 0,
+      "type": "Scenery",
+      "image": "undersea-ship.png",
+      "imagewidth": 288,
+      "imageheight": 156,
+      "properties": [
+        {
+          "name": "decoration",
+          "type": "bool",
+          "value": true
+        },
+        {
+          "name": "collides",
+          "type": "bool",
+          "value": false
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "type": "Scenery",
+      "image": "undersea-coral.png",
+      "imagewidth": 116,
+      "imageheight": 132,
+      "properties": [
+        {
+          "name": "decoration",
+          "type": "bool",
+          "value": true
+        },
+        {
+          "name": "collides",
+          "type": "bool",
+          "value": false
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "type": "Scenery",
+      "image": "undersea-pipe.png",
+      "imagewidth": 88,
+      "imageheight": 208,
+      "properties": [
+        {
+          "name": "decoration",
+          "type": "bool",
+          "value": true
+        },
+        {
+          "name": "collides",
+          "type": "bool",
+          "value": false
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "type": "Scenery",
+      "image": "undersea-shell.png",
+      "imagewidth": 88,
+      "imageheight": 72,
+      "properties": [
+        {
+          "name": "decoration",
+          "type": "bool",
+          "value": true
+        },
+        {
+          "name": "collides",
+          "type": "bool",
+          "value": false
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "type": "Scenery",
+      "image": "undersea-lamp.png",
+      "imagewidth": 48,
+      "imageheight": 76,
+      "properties": [
+        {
+          "name": "decoration",
+          "type": "bool",
+          "value": true
+        },
+        {
+          "name": "collides",
+          "type": "bool",
+          "value": false
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+Fusion Pixel Font 12px proportional, Simplified Chinese (zh-Hans)
+
+Source: https://github.com/TakWolf/fusion-pixel-font
+Release: https://github.com/TakWolf/fusion-pixel-font/releases/tag/2026.10.25
+Official download: https://github.com/TakWolf/fusion-pixel-font/releases/download/2026.10.25/fusion-pixel-font-12px-proportional-otf.woff2-v2026.10.25.zip
+Downloaded: 2026-10-26
+Selected font: fusion-pixel-12px-proportional-zh_hans.otf.woff2
+License: SIL Open Font License 1.1. The font may be bundled and self-hosted with the game; retain OFL.txt and the accompanying upstream notices in LICENSES/.
+The font is unmodified. No font build tools or installation scripts were executed.
+
+Suggested CSS family name: "Fusion Pixel"
+Suggested use: character names, section titles, buttons, numeric or compact game labels. The font uses a 12px pixel grid; use 12px, 24px, 36px or 48px for its strongest crisp pixel appearance. Use a system sans-serif for longer instructional prose if needed for readability.

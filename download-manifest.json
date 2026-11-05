@@ -1,0 +1,111 @@
+{
+  "preparedAt": "2026-10-24T13:36:53.348Z",
+  "platform": "Windows x64",
+  "files": [
+    {
+      "name": "node-v24.22.1-win-x64.zip",
+      "url": "https://nodejs.org/dist/v24.22.1/node-v24.22.1-win-x64.zip",
+      "sha256": "d2046d28c2c3dcd211ac5145c0bf30e2047ef9dfb306693c8c6e2eccd8b95fa5",
+      "verified": true,
+      "bytes": 37748064
+    },
+    {
+      "name": "Tiled-1.12.2-Windows-x64.msi",
+      "url": "https://github.com/mapeditor/tiled/releases/download/v1.12.2/Tiled-1.12.2_Windows-10%2B_x86_64.msi",
+      "sha256": "11a0e6c97cc105e07a57ea9995f2704617986722de4ab699d286dab0d2becc3f",
+      "checksumSource": "https://github.com/mapeditor/tiled/releases/expanded_assets/v1.12.2",
+      "verified": true,
+      "bytes": 23425024
+    }
+  ],
+  "packages": [
+    {
+      "name": "phaser",
+      "version": "4.2.1",
+      "integrity": "sha512-WUNwCPJpdjvZiuT6SgCfYVW8Qw/3j0jJ4ws7P2QkhFLFu74sbGuyHJcbFueGkY/AYO4Pi47bNQXn1OCJeLX//w==",
+      "tarball": "https://registry.npmjs.org/phaser/-/phaser-4.2.1.tgz"
+    },
+    {
+      "name": "phaser4-rex-plugins",
+      "version": "4.2.0",
+      "integrity": "sha512-Wc5pSEbz3iv5FJpxG/TXHzDK5YM3skHjeL4CHjd92h0BvsOCvJ6dxP30M7xVWDsLLPKKLQOFE9L2b8Dez5nwAw==",
+      "tarball": "https://registry.npmjs.org/phaser4-rex-plugins/-/phaser4-rex-plugins-4.2.0.tgz"
+    },
+    {
+      "name": "@colyseus/sdk",
+      "version": "0.18.6",
+      "integrity": "sha512-Vdi2XF8j8F/JOwqMwnTtauFYd3NvhLzB9Dr90qbWKG83RV/RotPJz0W8w+v52+cePUGbwblS+uAhg1AEuC7cQA==",
+      "tarball": "https://registry.npmjs.org/@colyseus/sdk/-/sdk-0.18.6.tgz"
+    },
+    {
+      "name": "@colyseus/core",
+      "version": "0.18.23",
+      "integrity": "sha512-wRnI7EoNgS5Up7x96hLHix1lYup184uL6BGjjR1XVUC7FO2xLf1uXQeO/Pon+rparRIM33qCRjCdxgi4cnenEA==",
+      "tarball": "https://registry.npmjs.org/@colyseus/core/-/core-0.18.23.tgz"
+    },
+    {
+      "name": "@colyseus/ws-transport",
+      "version": "0.18.4",
+      "integrity": "sha512-gSPEkhV9cX8QjJWJiXfkRF38ZIiWq7DbDvzkgGqa1zmdOSZBP1aaM9tnZyvcjc1OpG+AFggeehrs/QMDBEzz2g==",
+      "tarball": "https://registry.npmjs.org/@colyseus/ws-transport/-/ws-transport-0.18.4.tgz"
+    },
+    {
+      "name": "@colyseus/schema",
+      "version": "5.0.42",
+      "integrity": "sha512-Ovkt5p5p3slr5197WRFHOxf+UNO9qv6MvAHX8+qkecd5hUPLXQN/aWqbACf3/E5C/oimQvZCCav0baOMQffqDA==",
+      "tarball": "https://registry.npmjs.org/@colyseus/schema/-/schema-5.0.42.tgz"
+    },
+    {
+      "name": "@capacitor/core",
+      "version": "8.5.3",
+      "integrity": "sha512-oBE1oGuYE4ZzYYrulC75OuHdSsD6zLUy7d5o1tFwDLG4govGoubY15cxpiI5l0+q87Lm5p0bhbehMdzJg4aFag==",
+      "tarball": "https://registry.npmjs.org/@capacitor/core/-/core-8.5.3.tgz"
+    },
+    {
+      "name": "@capacitor/android",
+      "version": "8.5.3",
+      "integrity": "sha512-ilH4gSSz3DrketMkzDVAvY9JsWJ//rCQnECLTdcFRO7xXDogwAbUvQAnIAbiqefwV/D1xfjEL4Gw1MJXEcaA9g==",
+      "tarball": "https://registry.npmjs.org/@capacitor/android/-/android-8.5.3.tgz"
+    },
+    {
+      "name": "@capacitor/ios",
+      "version": "8.5.3",
+      "integrity": "sha512-HnnV92Jl8+3x0JUloXUMjFcUsQI8wHFVsKwkLn72DfRZXYGZW11tQbmNOWOnRTljaU18FdI1b9ipT09SzzPDNw==",
+      "tarball": "https://registry.npmjs.org/@capacitor/ios/-/ios-8.5.3.tgz"
+    },
+    {
+      "name": "@capacitor/cli",
+      "version": "8.5.3",
+      "integrity": "sha512-/G6xwna+p4GS3lthSdWN3OThCH2F85O0Ukdy8rv3oAXvgEMeyFgPEIA3PMAS++IkHwUuBYBAKOQJnZfcrh1n0w==",
+      "tarball": "https://registry.npmjs.org/@capacitor/cli/-/cli-8.5.3.tgz"
+    },
+    {
+      "name": "typescript",
+      "version": "7.0.2",
+      "integrity": "sha512-8FYau96o3NKOhbjKi/qNvG/W5jhzxkbdm5sj9AbZ/5T5sWqn3hJgLfGx27sRKZWTvyzCP8dLRBTf5tBTSRVUNA==",
+      "tarball": "https://registry.npmjs.org/typescript/-/typescript-7.0.2.tgz"
+    },
+    {
+      "name": "vite",
+      "version": "8.3.5",
+      "integrity": "sha512-z1YpjieJ9g0ebTmQpLBv/oq9E3F9EIlOe+7LahW8SrE3LTiG3udBRUXQOlYXP9b+IC2q2phHeVxj9xGlw34OEQ==",
+      "tarball": "https://registry.npmjs.org/vite/-/vite-8.3.5.tgz"
+    },
+    {
+      "name": "tsx",
+      "version": "4.23.15",
+      "integrity": "sha512-Yiex1Ovn8z2xPpOWckIiysV1SSyRMY9BkLF++q0yKiDxCqRhosKfMg3janKkiLBwZ5c/YryloKwGZcrEmtwxKw==",
+      "tarball": "https://registry.npmjs.org/tsx/-/tsx-4.23.15.tgz"
+    },
+    {
+      "name": "@types/node",
+      "version": "26.6.5",
+      "integrity": "sha512-uMzsv9stDdofIZBx4UGh4Z9ZgXnGC9seRDscilBcTHAeOFk67MZg/k9bWVfO+bk4qZmG+l52hRnLwUiH2LnJTg==",
+      "tarball": "https://registry.npmjs.org/@types/node/-/node-26.6.5.tgz"
+    }
+  ],
+  "aseprite": {
+    "status": "Not downloaded: paid license or existing purchase required.",
+    "officialUrl": "https://www.aseprite.org/"
+  }
+}

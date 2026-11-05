@@ -1,0 +1,5 @@
+Original pixel tiles, props, backgrounds and map layouts in this pack are dedicated to the public domain under CC0 1.0 Universal.
+https://creativecommons.org/publicdomain/zero/1.0/
+
+The Fusion Pixel font in preview/fonts is licensed separately under SIL Open Font License 1.1. See preview/fonts/OFL.txt.
+The Tiled application is a separate installation and is not included in this asset pack.

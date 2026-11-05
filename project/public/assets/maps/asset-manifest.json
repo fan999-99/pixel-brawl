@@ -1,0 +1,35 @@
+{
+  "tool": "built-in image_gen",
+  "type": "full-stage concept PNG",
+  "collisionConfigured": false,
+  "tiledEditable": false,
+  "assets": [
+    {
+      "theme": "sky",
+      "path": "C:\\Users\\admin\\Documents\\ChatGPT\\个人档案 2\\pixel-brawl\\project\\public\\assets\\maps\\sky-arena-v1.png",
+      "bytes": 2166988,
+      "sha256": "69FE8DB16DBA5C60A2CBC4DE21CFE460D3CAB1C844433C12D2AFCD3658061AA8",
+      "name": "sky-arena-v1.png",
+      "width": 1672,
+      "height": 940
+    },
+    {
+      "theme": "village",
+      "path": "C:\\Users\\admin\\Documents\\ChatGPT\\个人档案 2\\pixel-brawl\\project\\public\\assets\\maps\\village-arena-v1.png",
+      "bytes": 2430376,
+      "sha256": "B7162CF69544CDB55E47F0069F10790B5452094E034C4927B76DED3B7042FC02",
+      "name": "village-arena-v1.png",
+      "width": 1672,
+      "height": 941
+    },
+    {
+      "theme": "mountain",
+      "path": "C:\\Users\\admin\\Documents\\ChatGPT\\个人档案 2\\pixel-brawl\\project\\public\\assets\\maps\\mountain-arena-v1.png",
+      "bytes": 2426157,
+      "sha256": "B1CE8C877DEA763356932B4323EFCFEE6B2E95AB3FFEE8578845923A6E71E6EF",
+      "name": "mountain-arena-v1.png",
+      "width": 1672,
+      "height": 941
+    }
+  ]
+}

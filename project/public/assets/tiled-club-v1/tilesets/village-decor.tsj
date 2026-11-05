@@ -1,0 +1,113 @@
+{
+  "type": "tileset",
+  "version": "1.10",
+  "tiledversion": "1.12.2",
+  "name": "village-decor",
+  "tilewidth": 224,
+  "tileheight": 168,
+  "columns": 0,
+  "tilecount": 5,
+  "grid": {
+    "orientation": "orthogonal",
+    "width": 16,
+    "height": 16
+  },
+  "objectalignment": "bottomleft",
+  "tiles": [
+    {
+      "id": 0,
+      "type": "Scenery",
+      "image": "village-house.png",
+      "imagewidth": 224,
+      "imageheight": 168,
+      "properties": [
+        {
+          "name": "decoration",
+          "type": "bool",
+          "value": true
+        },
+        {
+          "name": "collides",
+          "type": "bool",
+          "value": false
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "type": "Scenery",
+      "image": "village-well.png",
+      "imagewidth": 104,
+      "imageheight": 88,
+      "properties": [
+        {
+          "name": "decoration",
+          "type": "bool",
+          "value": true
+        },
+        {
+          "name": "collides",
+          "type": "bool",
+          "value": false
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "type": "Scenery",
+      "image": "village-awning.png",
+      "imagewidth": 176,
+      "imageheight": 120,
+      "properties": [
+        {
+          "name": "decoration",
+          "type": "bool",
+          "value": true
+        },
+        {
+          "name": "collides",
+          "type": "bool",
+          "value": false
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "type": "Scenery",
+      "image": "village-crate.png",
+      "imagewidth": 48,
+      "imageheight": 48,
+      "properties": [
+        {
+          "name": "decoration",
+          "type": "bool",
+          "value": true
+        },
+        {
+          "name": "collides",
+          "type": "bool",
+          "value": false
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "type": "Scenery",
+      "image": "village-lantern.png",
+      "imagewidth": 40,
+      "imageheight": 64,
+      "properties": [
+        {
+          "name": "decoration",
+          "type": "bool",
+          "value": true
+        },
+        {
+          "name": "collides",
+          "type": "bool",
+          "value": false
+        }
+      ]
+    }
+  ]
+}

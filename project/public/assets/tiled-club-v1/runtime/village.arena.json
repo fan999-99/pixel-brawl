@@ -1,0 +1,1642 @@
+{
+  "id": "village",
+  "name": "歪歪村",
+  "subtitle": "村落 · 屋檐与集市",
+  "width": 2048,
+  "height": 1024,
+  "tileSize": 16,
+  "physics": {
+    "playerWidth": 32,
+    "playerHeight": 50,
+    "moveSpeed": 265,
+    "gravity": 1720,
+    "jumpSpeed": 770
+  },
+  "source": "maps/village.tmj",
+  "surfaces": [
+    {
+      "id": "platform-01",
+      "x": 64,
+      "y": 800,
+      "width": 576,
+      "height": 96,
+      "oneWay": false
+    },
+    {
+      "id": "platform-02",
+      "x": 688,
+      "y": 800,
+      "width": 672,
+      "height": 96,
+      "oneWay": false
+    },
+    {
+      "id": "platform-03",
+      "x": 1408,
+      "y": 800,
+      "width": 576,
+      "height": 96,
+      "oneWay": false
+    },
+    {
+      "id": "platform-04",
+      "x": 128,
+      "y": 688,
+      "width": 320,
+      "height": 8,
+      "oneWay": true
+    },
+    {
+      "id": "platform-05",
+      "x": 544,
+      "y": 688,
+      "width": 288,
+      "height": 8,
+      "oneWay": true
+    },
+    {
+      "id": "platform-06",
+      "x": 928,
+      "y": 688,
+      "width": 192,
+      "height": 8,
+      "oneWay": true
+    },
+    {
+      "id": "platform-07",
+      "x": 1216,
+      "y": 688,
+      "width": 288,
+      "height": 8,
+      "oneWay": true
+    },
+    {
+      "id": "platform-08",
+      "x": 1600,
+      "y": 688,
+      "width": 320,
+      "height": 8,
+      "oneWay": true
+    },
+    {
+      "id": "platform-09",
+      "x": 320,
+      "y": 576,
+      "width": 320,
+      "height": 8,
+      "oneWay": true
+    },
+    {
+      "id": "platform-10",
+      "x": 768,
+      "y": 576,
+      "width": 192,
+      "height": 8,
+      "oneWay": true
+    },
+    {
+      "id": "platform-11",
+      "x": 1088,
+      "y": 576,
+      "width": 192,
+      "height": 8,
+      "oneWay": true
+    },
+    {
+      "id": "platform-12",
+      "x": 1408,
+      "y": 576,
+      "width": 320,
+      "height": 8,
+      "oneWay": true
+    },
+    {
+      "id": "platform-13",
+      "x": 640,
+      "y": 464,
+      "width": 256,
+      "height": 8,
+      "oneWay": true
+    },
+    {
+      "id": "platform-14",
+      "x": 1152,
+      "y": 464,
+      "width": 256,
+      "height": 8,
+      "oneWay": true
+    },
+    {
+      "id": "platform-15",
+      "x": 912,
+      "y": 352,
+      "width": 224,
+      "height": 8,
+      "oneWay": true
+    }
+  ],
+  "spawnPoints": [
+    {
+      "id": 28,
+      "name": "1v1-1",
+      "type": "Spawn",
+      "x": 784,
+      "y": 800,
+      "width": 0,
+      "height": 0,
+      "rotation": 0,
+      "visible": true,
+      "point": true,
+      "properties": [
+        {
+          "name": "mode",
+          "type": "string",
+          "value": "1v1"
+        },
+        {
+          "name": "slot",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "name": "team",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "name": "feetAnchor",
+          "type": "bool",
+          "value": true
+        },
+        {
+          "name": "safeRadius",
+          "type": "int",
+          "value": 48
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "name": "1v1-2",
+      "type": "Spawn",
+      "x": 1264,
+      "y": 800,
+      "width": 0,
+      "height": 0,
+      "rotation": 0,
+      "visible": true,
+      "point": true,
+      "properties": [
+        {
+          "name": "mode",
+          "type": "string",
+          "value": "1v1"
+        },
+        {
+          "name": "slot",
+          "type": "int",
+          "value": 1
+        },
+        {
+          "name": "team",
+          "type": "int",
+          "value": 1
+        },
+        {
+          "name": "feetAnchor",
+          "type": "bool",
+          "value": true
+        },
+        {
+          "name": "safeRadius",
+          "type": "int",
+          "value": 48
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "name": "2v2-1",
+      "type": "Spawn",
+      "x": 288,
+      "y": 800,
+      "width": 0,
+      "height": 0,
+      "rotation": 0,
+      "visible": true,
+      "point": true,
+      "properties": [
+        {
+          "name": "mode",
+          "type": "string",
+          "value": "2v2"
+        },
+        {
+          "name": "slot",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "name": "team",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "name": "feetAnchor",
+          "type": "bool",
+          "value": true
+        },
+        {
+          "name": "safeRadius",
+          "type": "int",
+          "value": 48
+        }
+      ]
+    },
+    {
+      "id": 31,
+      "name": "2v2-2",
+      "type": "Spawn",
+      "x": 448,
+      "y": 800,
+      "width": 0,
+      "height": 0,
+      "rotation": 0,
+      "visible": true,
+      "point": true,
+      "properties": [
+        {
+          "name": "mode",
+          "type": "string",
+          "value": "2v2"
+        },
+        {
+          "name": "slot",
+          "type": "int",
+          "value": 1
+        },
+        {
+          "name": "team",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "name": "feetAnchor",
+          "type": "bool",
+          "value": true
+        },
+        {
+          "name": "safeRadius",
+          "type": "int",
+          "value": 48
+        }
+      ]
+    },
+    {
+      "id": 32,
+      "name": "2v2-3",
+      "type": "Spawn",
+      "x": 1600,
+      "y": 800,
+      "width": 0,
+      "height": 0,
+      "rotation": 0,
+      "visible": true,
+      "point": true,
+      "properties": [
+        {
+          "name": "mode",
+          "type": "string",
+          "value": "2v2"
+        },
+        {
+          "name": "slot",
+          "type": "int",
+          "value": 2
+        },
+        {
+          "name": "team",
+          "type": "int",
+          "value": 1
+        },
+        {
+          "name": "feetAnchor",
+          "type": "bool",
+          "value": true
+        },
+        {
+          "name": "safeRadius",
+          "type": "int",
+          "value": 48
+        }
+      ]
+    },
+    {
+      "id": 33,
+      "name": "2v2-4",
+      "type": "Spawn",
+      "x": 1760,
+      "y": 800,
+      "width": 0,
+      "height": 0,
+      "rotation": 0,
+      "visible": true,
+      "point": true,
+      "properties": [
+        {
+          "name": "mode",
+          "type": "string",
+          "value": "2v2"
+        },
+        {
+          "name": "slot",
+          "type": "int",
+          "value": 3
+        },
+        {
+          "name": "team",
+          "type": "int",
+          "value": 1
+        },
+        {
+          "name": "feetAnchor",
+          "type": "bool",
+          "value": true
+        },
+        {
+          "name": "safeRadius",
+          "type": "int",
+          "value": 48
+        }
+      ]
+    },
+    {
+      "id": 34,
+      "name": "ffa-1",
+      "type": "Spawn",
+      "x": 256,
+      "y": 800,
+      "width": 0,
+      "height": 0,
+      "rotation": 0,
+      "visible": true,
+      "point": true,
+      "properties": [
+        {
+          "name": "mode",
+          "type": "string",
+          "value": "ffa"
+        },
+        {
+          "name": "slot",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "name": "team",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "name": "feetAnchor",
+          "type": "bool",
+          "value": true
+        },
+        {
+          "name": "safeRadius",
+          "type": "int",
+          "value": 48
+        }
+      ]
+    },
+    {
+      "id": 35,
+      "name": "ffa-2",
+      "type": "Spawn",
+      "x": 816,
+      "y": 800,
+      "width": 0,
+      "height": 0,
+      "rotation": 0,
+      "visible": true,
+      "point": true,
+      "properties": [
+        {
+          "name": "mode",
+          "type": "string",
+          "value": "ffa"
+        },
+        {
+          "name": "slot",
+          "type": "int",
+          "value": 1
+        },
+        {
+          "name": "team",
+          "type": "int",
+          "value": 1
+        },
+        {
+          "name": "feetAnchor",
+          "type": "bool",
+          "value": true
+        },
+        {
+          "name": "safeRadius",
+          "type": "int",
+          "value": 48
+        }
+      ]
+    },
+    {
+      "id": 36,
+      "name": "ffa-3",
+      "type": "Spawn",
+      "x": 1232,
+      "y": 800,
+      "width": 0,
+      "height": 0,
+      "rotation": 0,
+      "visible": true,
+      "point": true,
+      "properties": [
+        {
+          "name": "mode",
+          "type": "string",
+          "value": "ffa"
+        },
+        {
+          "name": "slot",
+          "type": "int",
+          "value": 2
+        },
+        {
+          "name": "team",
+          "type": "int",
+          "value": 2
+        },
+        {
+          "name": "feetAnchor",
+          "type": "bool",
+          "value": true
+        },
+        {
+          "name": "safeRadius",
+          "type": "int",
+          "value": 48
+        }
+      ]
+    },
+    {
+      "id": 37,
+      "name": "ffa-4",
+      "type": "Spawn",
+      "x": 1792,
+      "y": 800,
+      "width": 0,
+      "height": 0,
+      "rotation": 0,
+      "visible": true,
+      "point": true,
+      "properties": [
+        {
+          "name": "mode",
+          "type": "string",
+          "value": "ffa"
+        },
+        {
+          "name": "slot",
+          "type": "int",
+          "value": 3
+        },
+        {
+          "name": "team",
+          "type": "int",
+          "value": 3
+        },
+        {
+          "name": "feetAnchor",
+          "type": "bool",
+          "value": true
+        },
+        {
+          "name": "safeRadius",
+          "type": "int",
+          "value": 48
+        }
+      ]
+    }
+  ],
+  "dropPoints": [
+    {
+      "id": 38,
+      "name": "drop-02",
+      "type": "Drop",
+      "x": 256,
+      "y": 688,
+      "width": 0,
+      "height": 0,
+      "rotation": 0,
+      "visible": true,
+      "point": true,
+      "properties": [
+        {
+          "name": "landingSurface",
+          "type": "string",
+          "value": "platform-04"
+        },
+        {
+          "name": "spawnY",
+          "type": "int",
+          "value": 496
+        },
+        {
+          "name": "quadrant",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "name": "warningSeconds",
+          "type": "float",
+          "value": 1.5
+        }
+      ]
+    },
+    {
+      "id": 39,
+      "name": "drop-03",
+      "type": "Drop",
+      "x": 384,
+      "y": 576,
+      "width": 0,
+      "height": 0,
+      "rotation": 0,
+      "visible": true,
+      "point": true,
+      "properties": [
+        {
+          "name": "landingSurface",
+          "type": "string",
+          "value": "platform-09"
+        },
+        {
+          "name": "spawnY",
+          "type": "int",
+          "value": 384
+        },
+        {
+          "name": "quadrant",
+          "type": "int",
+          "value": 0
+        },
+        {
+          "name": "warningSeconds",
+          "type": "float",
+          "value": 1.5
+        }
+      ]
+    },
+    {
+      "id": 40,
+      "name": "drop-04",
+      "type": "Drop",
+      "x": 512,
+      "y": 576,
+      "width": 0,
+      "height": 0,
+      "rotation": 0,
+      "visible": true,
+      "point": true,
+      "properties": [
+        {
+          "name": "landingSurface",
+          "type": "string",
+          "value": "platform-09"
+        },
+        {
+          "name": "spawnY",
+          "type": "int",
+          "value": 384
+        },
+        {
+          "name": "quadrant",
+          "type": "int",
+          "value": 1
+        },
+        {
+          "name": "warningSeconds",
+          "type": "float",
+          "value": 1.5
+        }
+      ]
+    },
+    {
+      "id": 41,
+      "name": "drop-06",
+      "type": "Drop",
+      "x": 768,
+      "y": 464,
+      "width": 0,
+      "height": 0,
+      "rotation": 0,
+      "visible": true,
+      "point": true,
+      "properties": [
+        {
+          "name": "landingSurface",
+          "type": "string",
+          "value": "platform-13"
+        },
+        {
+          "name": "spawnY",
+          "type": "int",
+          "value": 272
+        },
+        {
+          "name": "quadrant",
+          "type": "int",
+          "value": 1
+        },
+        {
+          "name": "warningSeconds",
+          "type": "float",
+          "value": 1.5
+        }
+      ]
+    },
+    {
+      "id": 42,
+      "name": "drop-08",
+      "type": "Drop",
+      "x": 1024,
+      "y": 352,
+      "width": 0,
+      "height": 0,
+      "rotation": 0,
+      "visible": true,
+      "point": true,
+      "properties": [
+        {
+          "name": "landingSurface",
+          "type": "string",
+          "value": "platform-15"
+        },
+        {
+          "name": "spawnY",
+          "type": "int",
+          "value": 160
+        },
+        {
+          "name": "quadrant",
+          "type": "int",
+          "value": 2
+        },
+        {
+          "name": "warningSeconds",
+          "type": "float",
+          "value": 1.5
+        }
+      ]
+    },
+    {
+      "id": 43,
+      "name": "drop-10",
+      "type": "Drop",
+      "x": 1280,
+      "y": 464,
+      "width": 0,
+      "height": 0,
+      "rotation": 0,
+      "visible": true,
+      "point": true,
+      "properties": [
+        {
+          "name": "landingSurface",
+          "type": "string",
+          "value": "platform-14"
+        },
+        {
+          "name": "spawnY",
+          "type": "int",
+          "value": 272
+        },
+        {
+          "name": "quadrant",
+          "type": "int",
+          "value": 2
+        },
+        {
+          "name": "warningSeconds",
+          "type": "float",
+          "value": 1.5
+        }
+      ]
+    },
+    {
+      "id": 44,
+      "name": "drop-12",
+      "type": "Drop",
+      "x": 1536,
+      "y": 576,
+      "width": 0,
+      "height": 0,
+      "rotation": 0,
+      "visible": true,
+      "point": true,
+      "properties": [
+        {
+          "name": "landingSurface",
+          "type": "string",
+          "value": "platform-12"
+        },
+        {
+          "name": "spawnY",
+          "type": "int",
+          "value": 384
+        },
+        {
+          "name": "quadrant",
+          "type": "int",
+          "value": 3
+        },
+        {
+          "name": "warningSeconds",
+          "type": "float",
+          "value": 1.5
+        }
+      ]
+    },
+    {
+      "id": 45,
+      "name": "drop-13",
+      "type": "Drop",
+      "x": 1664,
+      "y": 576,
+      "width": 0,
+      "height": 0,
+      "rotation": 0,
+      "visible": true,
+      "point": true,
+      "properties": [
+        {
+          "name": "landingSurface",
+          "type": "string",
+          "value": "platform-12"
+        },
+        {
+          "name": "spawnY",
+          "type": "int",
+          "value": 384
+        },
+        {
+          "name": "quadrant",
+          "type": "int",
+          "value": 3
+        },
+        {
+          "name": "warningSeconds",
+          "type": "float",
+          "value": 1.5
+        }
+      ]
+    },
+    {
+      "id": 46,
+      "name": "drop-14",
+      "type": "Drop",
+      "x": 1792,
+      "y": 688,
+      "width": 0,
+      "height": 0,
+      "rotation": 0,
+      "visible": true,
+      "point": true,
+      "properties": [
+        {
+          "name": "landingSurface",
+          "type": "string",
+          "value": "platform-08"
+        },
+        {
+          "name": "spawnY",
+          "type": "int",
+          "value": 496
+        },
+        {
+          "name": "quadrant",
+          "type": "int",
+          "value": 3
+        },
+        {
+          "name": "warningSeconds",
+          "type": "float",
+          "value": 1.5
+        }
+      ]
+    }
+  ],
+  "modes": [
+    {
+      "id": 49,
+      "name": "1v1",
+      "type": "ModeBounds",
+      "x": 512,
+      "y": 0,
+      "width": 1024,
+      "height": 1024,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
+        {
+          "name": "mode",
+          "type": "string",
+          "value": "1v1"
+        },
+        {
+          "name": "visibleBoundary",
+          "type": "bool",
+          "value": true
+        }
+      ]
+    },
+    {
+      "id": 50,
+      "name": "2v2",
+      "type": "ModeBounds",
+      "x": 0,
+      "y": 0,
+      "width": 2048,
+      "height": 1024,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
+        {
+          "name": "mode",
+          "type": "string",
+          "value": "2v2"
+        },
+        {
+          "name": "visibleBoundary",
+          "type": "bool",
+          "value": true
+        }
+      ]
+    },
+    {
+      "id": 51,
+      "name": "ffa",
+      "type": "ModeBounds",
+      "x": 0,
+      "y": 0,
+      "width": 2048,
+      "height": 1024,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
+        {
+          "name": "mode",
+          "type": "string",
+          "value": "ffa"
+        },
+        {
+          "name": "visibleBoundary",
+          "type": "bool",
+          "value": true
+        }
+      ]
+    }
+  ],
+  "cameraBounds": [
+    {
+      "id": 47,
+      "name": "camera-all",
+      "type": "CameraBounds",
+      "x": 0,
+      "y": 0,
+      "width": 2048,
+      "height": 1024,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
+        {
+          "name": "mode",
+          "type": "string",
+          "value": "all"
+        },
+        {
+          "name": "follow",
+          "type": "string",
+          "value": "localPlayer"
+        },
+        {
+          "name": "deadZoneX",
+          "type": "int",
+          "value": 80
+        },
+        {
+          "name": "deadZoneY",
+          "type": "int",
+          "value": 50
+        }
+      ]
+    },
+    {
+      "id": 48,
+      "name": "camera-1v1",
+      "type": "CameraBounds",
+      "x": 512,
+      "y": 0,
+      "width": 1024,
+      "height": 1024,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
+        {
+          "name": "mode",
+          "type": "string",
+          "value": "1v1"
+        },
+        {
+          "name": "follow",
+          "type": "string",
+          "value": "localPlayer"
+        },
+        {
+          "name": "deadZoneX",
+          "type": "int",
+          "value": 80
+        },
+        {
+          "name": "deadZoneY",
+          "type": "int",
+          "value": 50
+        }
+      ]
+    }
+  ],
+  "deathZones": [
+    {
+      "id": 52,
+      "name": "bottom",
+      "type": "InstantDeath",
+      "x": -256,
+      "y": 1008,
+      "width": 2560,
+      "height": 256,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
+        {
+          "name": "cause",
+          "type": "string",
+          "value": "fall"
+        },
+        {
+          "name": "instant",
+          "type": "bool",
+          "value": true
+        }
+      ]
+    },
+    {
+      "id": 53,
+      "name": "left",
+      "type": "InstantDeath",
+      "x": -256,
+      "y": -256,
+      "width": 256,
+      "height": 1264,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
+        {
+          "name": "cause",
+          "type": "string",
+          "value": "outOfBounds"
+        },
+        {
+          "name": "instant",
+          "type": "bool",
+          "value": true
+        }
+      ]
+    },
+    {
+      "id": 54,
+      "name": "right",
+      "type": "InstantDeath",
+      "x": 2048,
+      "y": -256,
+      "width": 256,
+      "height": 1264,
+      "rotation": 0,
+      "visible": true,
+      "properties": [
+        {
+          "name": "cause",
+          "type": "string",
+          "value": "outOfBounds"
+        },
+        {
+          "name": "instant",
+          "type": "bool",
+          "value": true
+        }
+      ]
+    }
+  ],
+  "navigation": [
+    {
+      "fromSurface": "platform-01",
+      "toSurface": "platform-02",
+      "takeoffX": 616,
+      "landingX": 712,
+      "deltaY": 0,
+      "action": "jump"
+    },
+    {
+      "fromSurface": "platform-01",
+      "toSurface": "platform-04",
+      "takeoffX": 288.0,
+      "landingX": 288.0,
+      "deltaY": -112,
+      "action": "jump"
+    },
+    {
+      "fromSurface": "platform-01",
+      "toSurface": "platform-05",
+      "takeoffX": 616,
+      "landingX": 616,
+      "deltaY": -112,
+      "action": "jump"
+    },
+    {
+      "fromSurface": "platform-02",
+      "toSurface": "platform-01",
+      "takeoffX": 712,
+      "landingX": 616,
+      "deltaY": 0,
+      "action": "jump"
+    },
+    {
+      "fromSurface": "platform-02",
+      "toSurface": "platform-03",
+      "takeoffX": 1336,
+      "landingX": 1432,
+      "deltaY": 0,
+      "action": "jump"
+    },
+    {
+      "fromSurface": "platform-02",
+      "toSurface": "platform-05",
+      "takeoffX": 712,
+      "landingX": 712,
+      "deltaY": -112,
+      "action": "jump"
+    },
+    {
+      "fromSurface": "platform-02",
+      "toSurface": "platform-06",
+      "takeoffX": 1024.0,
+      "landingX": 1024.0,
+      "deltaY": -112,
+      "action": "jump"
+    },
+    {
+      "fromSurface": "platform-02",
+      "toSurface": "platform-07",
+      "takeoffX": 1336,
+      "landingX": 1336,
+      "deltaY": -112,
+      "action": "jump"
+    },
+    {
+      "fromSurface": "platform-03",
+      "toSurface": "platform-02",
+      "takeoffX": 1432,
+      "landingX": 1336,
+      "deltaY": 0,
+      "action": "jump"
+    },
+    {
+      "fromSurface": "platform-03",
+      "toSurface": "platform-07",
+      "takeoffX": 1432,
+      "landingX": 1432,
+      "deltaY": -112,
+      "action": "jump"
+    },
+    {
+      "fromSurface": "platform-03",
+      "toSurface": "platform-08",
+      "takeoffX": 1760.0,
+      "landingX": 1760.0,
+      "deltaY": -112,
+      "action": "jump"
+    },
+    {
+      "fromSurface": "platform-04",
+      "toSurface": "platform-01",
+      "takeoffX": 352.0,
+      "landingX": 352.0,
+      "deltaY": 112,
+      "action": "drop"
+    },
+    {
+      "fromSurface": "platform-04",
+      "toSurface": "platform-05",
+      "takeoffX": 424,
+      "landingX": 568,
+      "deltaY": 0,
+      "action": "jump"
+    },
+    {
+      "fromSurface": "platform-04",
+      "toSurface": "platform-09",
+      "takeoffX": 424,
+      "landingX": 424,
+      "deltaY": -112,
+      "action": "jump"
+    },
+    {
+      "fromSurface": "platform-05",
+      "toSurface": "platform-01",
+      "takeoffX": 568,
+      "landingX": 568,
+      "deltaY": 112,
+      "action": "drop"
+    },
+    {
+      "fromSurface": "platform-05",
+      "toSurface": "platform-02",
+      "takeoffX": 808,
+      "landingX": 808,
+      "deltaY": 112,
+      "action": "drop"
+    },
+    {
+      "fromSurface": "platform-05",
+      "toSurface": "platform-04",
+      "takeoffX": 568,
+      "landingX": 424,
+      "deltaY": 0,
+      "action": "jump"
+    },
+    {
+      "fromSurface": "platform-05",
+      "toSurface": "platform-06",
+      "takeoffX": 808,
+      "landingX": 952,
+      "deltaY": 0,
+      "action": "jump"
+    },
+    {
+      "fromSurface": "platform-05",
+      "toSurface": "platform-09",
+      "takeoffX": 568,
+      "landingX": 568,
+      "deltaY": -112,
+      "action": "jump"
+    },
+    {
+      "fromSurface": "platform-05",
+      "toSurface": "platform-10",
+      "takeoffX": 808,
+      "landingX": 808,
+      "deltaY": -112,
+      "action": "jump"
+    },
+    {
+      "fromSurface": "platform-06",
+      "toSurface": "platform-02",
+      "takeoffX": 1024.0,
+      "landingX": 1024.0,
+      "deltaY": 112,
+      "action": "drop"
+    },
+    {
+      "fromSurface": "platform-06",
+      "toSurface": "platform-05",
+      "takeoffX": 952,
+      "landingX": 808,
+      "deltaY": 0,
+      "action": "jump"
+    },
+    {
+      "fromSurface": "platform-06",
+      "toSurface": "platform-07",
+      "takeoffX": 1096,
+      "landingX": 1240,
+      "deltaY": 0,
+      "action": "jump"
+    },
+    {
+      "fromSurface": "platform-06",
+      "toSurface": "platform-10",
+      "takeoffX": 952,
+      "landingX": 936,
+      "deltaY": -112,
+      "action": "jump"
+    },
+    {
+      "fromSurface": "platform-06",
+      "toSurface": "platform-11",
+      "takeoffX": 1096,
+      "landingX": 1112,
+      "deltaY": -112,
+      "action": "jump"
+    },
+    {
+      "fromSurface": "platform-07",
+      "toSurface": "platform-02",
+      "takeoffX": 1240,
+      "landingX": 1240,
+      "deltaY": 112,
+      "action": "drop"
+    },
+    {
+      "fromSurface": "platform-07",
+      "toSurface": "platform-03",
+      "takeoffX": 1480,
+      "landingX": 1480,
+      "deltaY": 112,
+      "action": "drop"
+    },
+    {
+      "fromSurface": "platform-07",
+      "toSurface": "platform-06",
+      "takeoffX": 1240,
+      "landingX": 1096,
+      "deltaY": 0,
+      "action": "jump"
+    },
+    {
+      "fromSurface": "platform-07",
+      "toSurface": "platform-08",
+      "takeoffX": 1480,
+      "landingX": 1624,
+      "deltaY": 0,
+      "action": "jump"
+    },
+    {
+      "fromSurface": "platform-07",
+      "toSurface": "platform-11",
+      "takeoffX": 1240,
+      "landingX": 1240,
+      "deltaY": -112,
+      "action": "jump"
+    },
+    {
+      "fromSurface": "platform-07",
+      "toSurface": "platform-12",
+      "takeoffX": 1480,
+      "landingX": 1480,
+      "deltaY": -112,
+      "action": "jump"
+    },
+    {
+      "fromSurface": "platform-08",
+      "toSurface": "platform-03",
+      "takeoffX": 1696.0,
+      "landingX": 1696.0,
+      "deltaY": 112,
+      "action": "drop"
+    },
+    {
+      "fromSurface": "platform-08",
+      "toSurface": "platform-07",
+      "takeoffX": 1624,
+      "landingX": 1480,
+      "deltaY": 0,
+      "action": "jump"
+    },
+    {
+      "fromSurface": "platform-08",
+      "toSurface": "platform-12",
+      "takeoffX": 1624,
+      "landingX": 1624,
+      "deltaY": -112,
+      "action": "jump"
+    },
+    {
+      "fromSurface": "platform-09",
+      "toSurface": "platform-01",
+      "takeoffX": 352.0,
+      "landingX": 352.0,
+      "deltaY": 224,
+      "action": "drop"
+    },
+    {
+      "fromSurface": "platform-09",
+      "toSurface": "platform-02",
+      "takeoffX": 616,
+      "landingX": 712,
+      "deltaY": 224,
+      "action": "drop"
+    },
+    {
+      "fromSurface": "platform-09",
+      "toSurface": "platform-04",
+      "takeoffX": 344,
+      "landingX": 344,
+      "deltaY": 112,
+      "action": "drop"
+    },
+    {
+      "fromSurface": "platform-09",
+      "toSurface": "platform-05",
+      "takeoffX": 616,
+      "landingX": 616,
+      "deltaY": 112,
+      "action": "drop"
+    },
+    {
+      "fromSurface": "platform-09",
+      "toSurface": "platform-10",
+      "takeoffX": 616,
+      "landingX": 792,
+      "deltaY": 0,
+      "action": "jump"
+    },
+    {
+      "fromSurface": "platform-09",
+      "toSurface": "platform-13",
+      "takeoffX": 616,
+      "landingX": 664,
+      "deltaY": -112,
+      "action": "jump"
+    },
+    {
+      "fromSurface": "platform-10",
+      "toSurface": "platform-01",
+      "takeoffX": 792,
+      "landingX": 616,
+      "deltaY": 224,
+      "action": "drop"
+    },
+    {
+      "fromSurface": "platform-10",
+      "toSurface": "platform-02",
+      "takeoffX": 936,
+      "landingX": 936,
+      "deltaY": 224,
+      "action": "drop"
+    },
+    {
+      "fromSurface": "platform-10",
+      "toSurface": "platform-05",
+      "takeoffX": 792,
+      "landingX": 792,
+      "deltaY": 112,
+      "action": "drop"
+    },
+    {
+      "fromSurface": "platform-10",
+      "toSurface": "platform-06",
+      "takeoffX": 936,
+      "landingX": 952,
+      "deltaY": 112,
+      "action": "jump"
+    },
+    {
+      "fromSurface": "platform-10",
+      "toSurface": "platform-09",
+      "takeoffX": 792,
+      "landingX": 616,
+      "deltaY": 0,
+      "action": "jump"
+    },
+    {
+      "fromSurface": "platform-10",
+      "toSurface": "platform-11",
+      "takeoffX": 936,
+      "landingX": 1112,
+      "deltaY": 0,
+      "action": "jump"
+    },
+    {
+      "fromSurface": "platform-10",
+      "toSurface": "platform-13",
+      "takeoffX": 792,
+      "landingX": 792,
+      "deltaY": -112,
+      "action": "jump"
+    },
+    {
+      "fromSurface": "platform-11",
+      "toSurface": "platform-02",
+      "takeoffX": 1112,
+      "landingX": 1112,
+      "deltaY": 224,
+      "action": "drop"
+    },
+    {
+      "fromSurface": "platform-11",
+      "toSurface": "platform-03",
+      "takeoffX": 1256,
+      "landingX": 1432,
+      "deltaY": 224,
+      "action": "drop"
+    },
+    {
+      "fromSurface": "platform-11",
+      "toSurface": "platform-06",
+      "takeoffX": 1112,
+      "landingX": 1096,
+      "deltaY": 112,
+      "action": "jump"
+    },
+    {
+      "fromSurface": "platform-11",
+      "toSurface": "platform-07",
+      "takeoffX": 1256,
+      "landingX": 1256,
+      "deltaY": 112,
+      "action": "drop"
+    },
+    {
+      "fromSurface": "platform-11",
+      "toSurface": "platform-10",
+      "takeoffX": 1112,
+      "landingX": 936,
+      "deltaY": 0,
+      "action": "jump"
+    },
+    {
+      "fromSurface": "platform-11",
+      "toSurface": "platform-12",
+      "takeoffX": 1256,
+      "landingX": 1432,
+      "deltaY": 0,
+      "action": "jump"
+    },
+    {
+      "fromSurface": "platform-11",
+      "toSurface": "platform-14",
+      "takeoffX": 1256,
+      "landingX": 1256,
+      "deltaY": -112,
+      "action": "jump"
+    },
+    {
+      "fromSurface": "platform-12",
+      "toSurface": "platform-02",
+      "takeoffX": 1432,
+      "landingX": 1336,
+      "deltaY": 224,
+      "action": "drop"
+    },
+    {
+      "fromSurface": "platform-12",
+      "toSurface": "platform-03",
+      "takeoffX": 1696.0,
+      "landingX": 1696.0,
+      "deltaY": 224,
+      "action": "drop"
+    },
+    {
+      "fromSurface": "platform-12",
+      "toSurface": "platform-07",
+      "takeoffX": 1432,
+      "landingX": 1432,
+      "deltaY": 112,
+      "action": "drop"
+    },
+    {
+      "fromSurface": "platform-12",
+      "toSurface": "platform-08",
+      "takeoffX": 1704,
+      "landingX": 1704,
+      "deltaY": 112,
+      "action": "drop"
+    },
+    {
+      "fromSurface": "platform-12",
+      "toSurface": "platform-11",
+      "takeoffX": 1432,
+      "landingX": 1256,
+      "deltaY": 0,
+      "action": "jump"
+    },
+    {
+      "fromSurface": "platform-12",
+      "toSurface": "platform-14",
+      "takeoffX": 1432,
+      "landingX": 1384,
+      "deltaY": -112,
+      "action": "jump"
+    },
+    {
+      "fromSurface": "platform-13",
+      "toSurface": "platform-05",
+      "takeoffX": 688.0,
+      "landingX": 688.0,
+      "deltaY": 224,
+      "action": "drop"
+    },
+    {
+      "fromSurface": "platform-13",
+      "toSurface": "platform-06",
+      "takeoffX": 872,
+      "landingX": 952,
+      "deltaY": 224,
+      "action": "jump"
+    },
+    {
+      "fromSurface": "platform-13",
+      "toSurface": "platform-09",
+      "takeoffX": 664,
+      "landingX": 616,
+      "deltaY": 112,
+      "action": "jump"
+    },
+    {
+      "fromSurface": "platform-13",
+      "toSurface": "platform-10",
+      "takeoffX": 864.0,
+      "landingX": 864.0,
+      "deltaY": 112,
+      "action": "drop"
+    },
+    {
+      "fromSurface": "platform-13",
+      "toSurface": "platform-15",
+      "takeoffX": 872,
+      "landingX": 936,
+      "deltaY": -112,
+      "action": "jump"
+    },
+    {
+      "fromSurface": "platform-14",
+      "toSurface": "platform-06",
+      "takeoffX": 1176,
+      "landingX": 1096,
+      "deltaY": 224,
+      "action": "jump"
+    },
+    {
+      "fromSurface": "platform-14",
+      "toSurface": "platform-07",
+      "takeoffX": 1360.0,
+      "landingX": 1360.0,
+      "deltaY": 224,
+      "action": "drop"
+    },
+    {
+      "fromSurface": "platform-14",
+      "toSurface": "platform-11",
+      "takeoffX": 1184.0,
+      "landingX": 1184.0,
+      "deltaY": 112,
+      "action": "drop"
+    },
+    {
+      "fromSurface": "platform-14",
+      "toSurface": "platform-12",
+      "takeoffX": 1384,
+      "landingX": 1432,
+      "deltaY": 112,
+      "action": "jump"
+    },
+    {
+      "fromSurface": "platform-14",
+      "toSurface": "platform-15",
+      "takeoffX": 1176,
+      "landingX": 1112,
+      "deltaY": -112,
+      "action": "jump"
+    },
+    {
+      "fromSurface": "platform-15",
+      "toSurface": "platform-10",
+      "takeoffX": 936,
+      "landingX": 936,
+      "deltaY": 224,
+      "action": "drop"
+    },
+    {
+      "fromSurface": "platform-15",
+      "toSurface": "platform-11",
+      "takeoffX": 1112,
+      "landingX": 1112,
+      "deltaY": 224,
+      "action": "drop"
+    },
+    {
+      "fromSurface": "platform-15",
+      "toSurface": "platform-13",
+      "takeoffX": 936,
+      "landingX": 872,
+      "deltaY": 112,
+      "action": "jump"
+    },
+    {
+      "fromSurface": "platform-15",
+      "toSurface": "platform-14",
+      "takeoffX": 1112,
+      "landingX": 1176,
+      "deltaY": 112,
+      "action": "jump"
+    }
+  ]
+}

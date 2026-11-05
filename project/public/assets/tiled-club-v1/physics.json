@@ -1,0 +1,7 @@
+{
+  "playerWidth": 32,
+  "playerHeight": 50,
+  "moveSpeed": 265,
+  "gravity": 1720,
+  "jumpSpeed": 770
+}

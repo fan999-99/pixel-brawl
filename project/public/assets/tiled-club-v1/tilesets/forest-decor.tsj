@@ -1,0 +1,113 @@
+{
+  "type": "tileset",
+  "version": "1.10",
+  "tiledversion": "1.12.2",
+  "name": "forest-decor",
+  "tilewidth": 224,
+  "tileheight": 344,
+  "columns": 0,
+  "tilecount": 5,
+  "grid": {
+    "orientation": "orthogonal",
+    "width": 16,
+    "height": 16
+  },
+  "objectalignment": "bottomleft",
+  "tiles": [
+    {
+      "id": 0,
+      "type": "Scenery",
+      "image": "forest-tree.png",
+      "imagewidth": 224,
+      "imageheight": 344,
+      "properties": [
+        {
+          "name": "decoration",
+          "type": "bool",
+          "value": true
+        },
+        {
+          "name": "collides",
+          "type": "bool",
+          "value": false
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "type": "Scenery",
+      "image": "forest-treehouse.png",
+      "imagewidth": 192,
+      "imageheight": 136,
+      "properties": [
+        {
+          "name": "decoration",
+          "type": "bool",
+          "value": true
+        },
+        {
+          "name": "collides",
+          "type": "bool",
+          "value": false
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "type": "Scenery",
+      "image": "forest-fern.png",
+      "imagewidth": 96,
+      "imageheight": 68,
+      "properties": [
+        {
+          "name": "decoration",
+          "type": "bool",
+          "value": true
+        },
+        {
+          "name": "collides",
+          "type": "bool",
+          "value": false
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "type": "Scenery",
+      "image": "forest-mushroom.png",
+      "imagewidth": 116,
+      "imageheight": 120,
+      "properties": [
+        {
+          "name": "decoration",
+          "type": "bool",
+          "value": true
+        },
+        {
+          "name": "collides",
+          "type": "bool",
+          "value": false
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "type": "Scenery",
+      "image": "forest-log.png",
+      "imagewidth": 124,
+      "imageheight": 68,
+      "properties": [
+        {
+          "name": "decoration",
+          "type": "bool",
+          "value": true
+        },
+        {
+          "name": "collides",
+          "type": "bool",
+          "value": false
+        }
+      ]
+    }
+  ]
+}

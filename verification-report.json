@@ -1,0 +1,80 @@
+{
+  "verifiedAt": "2026-10-24T13:46:21.100Z",
+  "node": "v24.22.1",
+  "packages": [
+    {
+      "name": "phaser",
+      "version": "4.2.1",
+      "status": "installed"
+    },
+    {
+      "name": "phaser4-rex-plugins",
+      "version": "4.2.0",
+      "status": "installed"
+    },
+    {
+      "name": "@colyseus/sdk",
+      "version": "0.18.6",
+      "status": "installed"
+    },
+    {
+      "name": "@colyseus/core",
+      "version": "0.18.23",
+      "status": "installed"
+    },
+    {
+      "name": "@colyseus/ws-transport",
+      "version": "0.18.4",
+      "status": "installed"
+    },
+    {
+      "name": "@colyseus/schema",
+      "version": "5.0.42",
+      "status": "installed"
+    },
+    {
+      "name": "@capacitor/core",
+      "version": "8.5.3",
+      "status": "installed"
+    },
+    {
+      "name": "@capacitor/android",
+      "version": "8.5.3",
+      "status": "installed"
+    },
+    {
+      "name": "@capacitor/ios",
+      "version": "8.5.3",
+      "status": "installed"
+    },
+    {
+      "name": "@capacitor/cli",
+      "version": "8.5.3",
+      "status": "installed"
+    },
+    {
+      "name": "typescript",
+      "version": "7.0.2",
+      "status": "installed"
+    },
+    {
+      "name": "vite",
+      "version": "8.3.5",
+      "status": "installed"
+    },
+    {
+      "name": "tsx",
+      "version": "4.23.15",
+      "status": "installed"
+    },
+    {
+      "name": "@types/node",
+      "version": "26.6.5",
+      "status": "installed"
+    }
+  ],
+  "runtimeImports": "passed",
+  "joystickFile": "present",
+  "vite": "vite/8.3.5 win32-x64 node-v24.22.1",
+  "capacitor": "8.5.3"
+}

@@ -1,0 +1,64 @@
+{
+  "generated": true,
+  "allPlatformsConnectedByConservativeNavigationGraph": true,
+  "safeSpawnPoints": true,
+  "dropPointsReachable": true,
+  "maps": [
+    {
+      "id": "underground",
+      "name": "蘑菇矿坑",
+      "subtitle": "地底 · 矿灯与蘑菇",
+      "accent": "#70dbc0",
+      "map": "maps/underground.tmj",
+      "runtime": "runtime/underground.arena.json",
+      "preview": "previews/underground.png",
+      "platforms": 15,
+      "reachablePlatforms": 15,
+      "spawnPoints": 10,
+      "dropPoints": 9,
+      "navigationLinks": 70
+    },
+    {
+      "id": "village",
+      "name": "歪歪村",
+      "subtitle": "村落 · 屋檐与集市",
+      "accent": "#e3a35d",
+      "map": "maps/village.tmj",
+      "runtime": "runtime/village.arena.json",
+      "preview": "previews/village.png",
+      "platforms": 15,
+      "reachablePlatforms": 15,
+      "spawnPoints": 10,
+      "dropPoints": 9,
+      "navigationLinks": 74
+    },
+    {
+      "id": "undersea",
+      "name": "泡泡避难所",
+      "subtitle": "海底 · 穹顶观测站",
+      "accent": "#83d8cd",
+      "map": "maps/undersea.tmj",
+      "runtime": "runtime/undersea.arena.json",
+      "preview": "previews/undersea.png",
+      "platforms": 15,
+      "reachablePlatforms": 15,
+      "spawnPoints": 10,
+      "dropPoints": 9,
+      "navigationLinks": 76
+    },
+    {
+      "id": "forest",
+      "name": "歪树森林",
+      "subtitle": "森林 · 树屋与木桥",
+      "accent": "#edbd72",
+      "map": "maps/forest.tmj",
+      "runtime": "runtime/forest.arena.json",
+      "preview": "previews/forest.png",
+      "platforms": 15,
+      "reachablePlatforms": 15,
+      "spawnPoints": 10,
+      "dropPoints": 11,
+      "navigationLinks": 74
+    }
+  ]
+}

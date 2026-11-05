@@ -1,4 +1,4 @@
 project/node_modules/
 .npm-cache/
 downloads/
-tools/
+/tools/

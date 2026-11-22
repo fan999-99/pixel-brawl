@@ -7,7 +7,7 @@ import { dirname, extname, isAbsolute, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { Room, Server, ServerError, type Client } from '@colyseus/core';
 import { WebSocketTransport } from '@colyseus/ws-transport';
-import { CHARACTERS, DEFAULT_SETTINGS } from '../shared/config.js';
+import { CHARACTERS, DEFAULT_SETTINGS, MAP_IDS } from '../shared/config.js';
 import { createGame, snapshotGame, stepGame, type GameState } from '../shared/game.js';
 import { EMPTY_INPUT, type CharacterId, type Difficulty, type InputState, type LobbySnapshot, type MatchSettings, type RosterPlayer } from '../shared/types.js';
 
@@ -40,7 +40,7 @@ export function validateSettings(value: unknown, base: MatchSettings = DEFAULT_S
   if (Object.keys(patch).some(key => !SETTINGS_KEYS.has(key))) throw new Error('包含未知的房间设置。');
   const settings = { ...base, ...patch } as MatchSettings;
   if (!['1v1', '2v2', 'ffa'].includes(settings.mode)) throw new Error('对战模式不正确。');
-  if (!['sky', 'village', 'mountain'].includes(settings.map)) throw new Error('地图不正确。');
+  if (!MAP_IDS.includes(settings.map)) throw new Error('地图不正确。');
   if (!Number.isInteger(settings.roundsToWin) || settings.roundsToWin < 1 || settings.roundsToWin > 5) throw new Error('获胜局数应为1至5。');
   if (!Number.isFinite(settings.dropInterval) || settings.dropInterval < 5 || settings.dropInterval > 60) throw new Error('道具间隔应为5至60秒。');
   if (typeof settings.friendlyFire !== 'boolean' || typeof settings.itemsEnabled !== 'boolean') throw new Error('道具和友伤设置不正确。');

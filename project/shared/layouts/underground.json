@@ -1,0 +1,171 @@
+{
+  "id": "underground",
+  "name": "蘑菇矿坑",
+  "width": 1774,
+  "height": 887,
+  "platforms": [
+    {
+      "id": "left-low",
+      "x": 65,
+      "y": 670,
+      "width": 350,
+      "height": 28,
+      "oneWay": false
+    },
+    {
+      "id": "main",
+      "x": 480,
+      "y": 604,
+      "width": 796,
+      "height": 36,
+      "oneWay": false
+    },
+    {
+      "id": "right-low",
+      "x": 1354,
+      "y": 670,
+      "width": 337,
+      "height": 28,
+      "oneWay": false
+    },
+    {
+      "id": "left-ledge",
+      "x": 0,
+      "y": 584,
+      "width": 375,
+      "height": 24,
+      "oneWay": false
+    },
+    {
+      "id": "right-ledge",
+      "x": 1422,
+      "y": 578,
+      "width": 352,
+      "height": 24,
+      "oneWay": false
+    },
+    {
+      "id": "left-bridge",
+      "x": 192,
+      "y": 402,
+      "width": 446,
+      "height": 18,
+      "oneWay": true
+    },
+    {
+      "id": "right-bridge",
+      "x": 1138,
+      "y": 402,
+      "width": 430,
+      "height": 18,
+      "oneWay": true
+    },
+    {
+      "id": "left-step",
+      "x": 580,
+      "y": 473,
+      "width": 178,
+      "height": 20,
+      "oneWay": true
+    },
+    {
+      "id": "right-step",
+      "x": 1018,
+      "y": 473,
+      "width": 178,
+      "height": 20,
+      "oneWay": true
+    },
+    {
+      "id": "upper-left",
+      "x": 475,
+      "y": 236,
+      "width": 190,
+      "height": 20,
+      "oneWay": true
+    },
+    {
+      "id": "upper-center",
+      "x": 788,
+      "y": 233,
+      "width": 199,
+      "height": 18,
+      "oneWay": true
+    },
+    {
+      "id": "upper-right",
+      "x": 1110,
+      "y": 236,
+      "width": 190,
+      "height": 20,
+      "oneWay": true
+    }
+  ],
+  "spawns": [
+    {
+      "id": "P1",
+      "x": 582,
+      "y": 604,
+      "platformId": "main",
+      "team": 0
+    },
+    {
+      "id": "P2",
+      "x": 1190,
+      "y": 604,
+      "platformId": "main",
+      "team": 1
+    },
+    {
+      "id": "P3",
+      "x": 345,
+      "y": 402,
+      "platformId": "left-bridge",
+      "team": 0
+    },
+    {
+      "id": "P4",
+      "x": 1430,
+      "y": 402,
+      "platformId": "right-bridge",
+      "team": 1
+    }
+  ],
+  "airdrops": [
+    {
+      "id": "airdrop-1",
+      "x": 290,
+      "spawnY": -24,
+      "landingY": 402,
+      "platformId": "left-bridge"
+    },
+    {
+      "id": "airdrop-2",
+      "x": 630,
+      "spawnY": -24,
+      "landingY": 236,
+      "platformId": "upper-left"
+    },
+    {
+      "id": "airdrop-3",
+      "x": 1140,
+      "spawnY": -24,
+      "landingY": 236,
+      "platformId": "upper-right"
+    },
+    {
+      "id": "airdrop-4",
+      "x": 1480,
+      "spawnY": -24,
+      "landingY": 402,
+      "platformId": "right-bridge"
+    }
+  ],
+  "deathBounds": {
+    "left": 0,
+    "right": 1774,
+    "bottom": 887
+  },
+  "particleTheme": "underground",
+  "draft": true
+}

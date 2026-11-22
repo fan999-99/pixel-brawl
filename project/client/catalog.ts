@@ -25,9 +25,10 @@ const CHARACTER_DETAILS: Record<CharacterId, { skills: [string, string]; weaknes
 };
 
 const MAP_DETAILS: Record<MapId, { layout: string; approach: string }> = {
-  sky: { layout: '一块主地面，左右对称平台，加中央高台。', approach: '左右路线较对称，适合熟悉二段跳、上下换位和空投争抢。' },
-  village: { layout: '宽主地面，左侧低台、中央台与右侧高台。', approach: '平台高度不完全对称。借低台起跳，也留意另一侧的投射物。' },
-  mountain: { layout: '较窄主地面，左右中层平台，加中央高台。', approach: '靠近对手更快。争取侧台后，从两条路线进攻中央高位。' },
+  underground: { layout: '中间主台，左右低台与栈桥，上层有三块浮台。', approach: '从栈桥上到高台。绿色单向平台可以按住下落后跳穿过去。' },
+  village: { layout: '石台居中，左右房屋有台阶、阳台和屋顶，上方是绳桥。', approach: '沿左侧台阶上楼。绳桥两端比桥面更高，适合抢空投。' },
+  undersea: { layout: '中央船舱，左右舱室更高，中层管道通向顶部浮台。', approach: '先站上侧舱，再经管道到穹顶。别从舱室边缘被打出去。' },
+  forest: { layout: '三块地面高度不同，中间有踏板、木桩和树顶。', approach: '踏板连着木桩，可以爬上树顶。右侧树屋比中间地面更高。' },
 };
 
 const ITEM_DETAILS: Record<ItemKind, { use: string; effect: string; response: string }> = {
@@ -68,7 +69,7 @@ export function catalogMarkup(kind: CatalogKind): CatalogContent {
 
   if (kind === 'maps') return {
     title: '地图查看',
-    subtitle: '天空、村落、山地。',
+    subtitle: '矿坑、村落、海底、森林。',
     html: `<div class="catalog-grid">${Object.values(ARENAS).map(map => {
       const detail = MAP_DETAILS[map.id];
       return `<article class="catalog-card"><img class="catalog-map" src="${esc(map.background)}" alt="${esc(map.subtitle)}"/><h3>${esc(map.name)}</h3><p class="catalog-role">${esc(map.subtitle)}</p><p>${esc(detail.layout)}</p><p class="catalog-tip">${esc(detail.approach)}</p></article>`;

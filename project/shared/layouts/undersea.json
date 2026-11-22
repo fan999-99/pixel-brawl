@@ -1,0 +1,139 @@
+{
+  "id": "undersea",
+  "name": "泡泡避难所",
+  "width": 1774,
+  "height": 887,
+  "platforms": [
+    {
+      "id": "left-base",
+      "x": 127,
+      "y": 539,
+      "width": 315,
+      "height": 30,
+      "oneWay": false
+    },
+    {
+      "id": "main",
+      "x": 534,
+      "y": 615,
+      "width": 706,
+      "height": 34,
+      "oneWay": false
+    },
+    {
+      "id": "right-base",
+      "x": 1330,
+      "y": 539,
+      "width": 321,
+      "height": 30,
+      "oneWay": false
+    },
+    {
+      "id": "left-middle",
+      "x": 429,
+      "y": 392,
+      "width": 255,
+      "height": 18,
+      "oneWay": true
+    },
+    {
+      "id": "right-middle",
+      "x": 1088,
+      "y": 392,
+      "width": 253,
+      "height": 18,
+      "oneWay": true
+    },
+    {
+      "id": "upper-left",
+      "x": 371,
+      "y": 245,
+      "width": 142,
+      "height": 16,
+      "oneWay": true
+    },
+    {
+      "id": "upper-center",
+      "x": 650,
+      "y": 231,
+      "width": 475,
+      "height": 22,
+      "oneWay": true
+    },
+    {
+      "id": "upper-right",
+      "x": 1262,
+      "y": 245,
+      "width": 141,
+      "height": 16,
+      "oneWay": true
+    }
+  ],
+  "spawns": [
+    {
+      "id": "P1",
+      "x": 630,
+      "y": 615,
+      "platformId": "main",
+      "team": 0
+    },
+    {
+      "id": "P2",
+      "x": 1144,
+      "y": 615,
+      "platformId": "main",
+      "team": 1
+    },
+    {
+      "id": "P3",
+      "x": 290,
+      "y": 539,
+      "platformId": "left-base",
+      "team": 0
+    },
+    {
+      "id": "P4",
+      "x": 1484,
+      "y": 539,
+      "platformId": "right-base",
+      "team": 1
+    }
+  ],
+  "airdrops": [
+    {
+      "id": "airdrop-1",
+      "x": 290,
+      "spawnY": -24,
+      "landingY": 539,
+      "platformId": "left-base"
+    },
+    {
+      "id": "airdrop-2",
+      "x": 555,
+      "spawnY": -24,
+      "landingY": 392,
+      "platformId": "left-middle"
+    },
+    {
+      "id": "airdrop-3",
+      "x": 1215,
+      "spawnY": -24,
+      "landingY": 392,
+      "platformId": "right-middle"
+    },
+    {
+      "id": "airdrop-4",
+      "x": 1484,
+      "spawnY": -24,
+      "landingY": 539,
+      "platformId": "right-base"
+    }
+  ],
+  "deathBounds": {
+    "left": 0,
+    "right": 1774,
+    "bottom": 887
+  },
+  "particleTheme": "undersea",
+  "draft": true
+}

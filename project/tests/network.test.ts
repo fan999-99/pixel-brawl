@@ -100,7 +100,7 @@ test('real room networking, host permissions, authoritative snapshots, and safe 
       assert.equal(host.lobby!.players.find(player => player.id === guest.room.sessionId)!.character, guestCharacter, 'host randomization changed a guest selection');
       guest.room.send('settings', { map: 'village' });
       await until(() => guest.errors.some(error => error.includes('房主')), 'non-host setting mutation was not rejected');
-      assert.equal(host.lobby?.settings.map, 'sky');
+      assert.equal(host.lobby?.settings.map, 'underground');
       guest.room.send('profile', { id: host.room.sessionId, name: '冒充', character: 'raccoon' });
       await until(() => guest.errors.some(error => error.includes('自己')), 'spoofed profile was not rejected');
       host.room.send('start');
@@ -120,9 +120,9 @@ test('real room networking, host permissions, authoritative snapshots, and safe 
       guest.room.send('input', { ...EMPTY_INPUT, move: 1, x: 999999, hp: 999 });
       await until(() => guest.errors.some(error => error.includes('只允许')), 'client position/HP packet was not rejected');
       const previousErrors = host.errors.length;
-      host.room.send('settings', { map: 'mountain' });
+      host.room.send('settings', { map: 'forest' });
       await until(() => host.errors.length > previousErrors, 'mid-match settings were not locked');
-      assert.equal(host.lobby?.settings.map, 'sky');
+      assert.equal(host.lobby?.settings.map, 'underground');
       await host.room.leave();
       await until(() => guest.lobby?.hostId === guest.room.sessionId, 'host was not transferred');
       assert.ok(guest.lobby?.players.find(player => player.id === host.room.sessionId)?.bot, 'departed combatant not replaced by bot');

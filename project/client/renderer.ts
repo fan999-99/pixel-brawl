@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
-import { ARENAS, CHARACTERS, ITEM_NAMES, MODE_NAMES, WORLD_HEIGHT, WORLD_WIDTH } from '../shared/config.js';
+import { ClubEffects } from './effects/club-effects.js';
+import { ARENAS, CHARACTERS, DEFAULT_SETTINGS, ITEM_NAMES, MODE_NAMES, WORLD_HEIGHT, WORLD_WIDTH } from '../shared/config.js';
 import type { CharacterId, GameEvent, GameSnapshot, ItemKind, MapId, PlayerSnapshot, RosterPlayer } from '../shared/types.js';
 
 export interface GameRenderer {
@@ -7,6 +8,7 @@ export interface GameRenderer {
   preview(map: MapId, roster: RosterPlayer[]): void;
   destroy(): void;
   setMuted(muted: boolean): void;
+  setPaused(paused: boolean): void;
   shake?(amount: number): void;
 }
 
@@ -194,7 +196,10 @@ class ArenaScene extends Phaser.Scene {
   private floating: FloatLabel[] = [];
   private seen = new Set<number>();
   private eventQueue: number[] = [];
-  private map: MapId = 'sky';
+  private map: MapId = DEFAULT_SETTINGS.map;
+  private club?: ClubEffects;
+  private simPaused = false;
+  private particleHold = false;
   private tick = -1;
   private disposed = false;
   private shakeStarted = 0;
@@ -208,7 +213,7 @@ class ArenaScene extends Phaser.Scene {
   create() {
     this.cameras.main.setRoundPixels(true);
     this.world = this.add.container(0, 0).setDepth(0);
-    this.background = this.worldObject(this.add.image(640, 360, 'arena-sky').setDisplaySize(WORLD_WIDTH, WORLD_HEIGHT).setDepth(0));
+    this.background = this.worldObject(this.add.image(WORLD_WIDTH / 2, WORLD_HEIGHT / 2, `arena-${DEFAULT_SETTINGS.map}`).setDisplaySize(WORLD_WIDTH, WORLD_HEIGHT).setDepth(0));
     this.stage = this.worldObject(this.add.graphics().setDepth(1));
     this.shadows = this.worldObject(this.add.graphics().setDepth(2));
     this.objects = this.worldObject(this.add.graphics().setDepth(6));
@@ -216,13 +221,16 @@ class ArenaScene extends Phaser.Scene {
     this.hud = this.add.graphics().setDepth(20);
     for (const character of Object.keys(CHARACTERS) as CharacterId[]) for (const pose of POSES) makeCharacterTexture(this, character, pose);
     const text = (x: number, y: number, value: string, size: number, color = '#fff7e5') => this.add.text(x, y, value, { fontFamily: FONT, fontSize: size, color, stroke: '#17243e', strokeThickness: 3, padding: { x: 3, y: 2 } });
-    this.title = text(640, 65, '', 13).setOrigin(.5, 0).setDepth(21);
-    this.timer = text(640, 15, '', 36).setOrigin(.5, 0).setDepth(21);
-    this.overlay = text(640, 222, '', 55).setOrigin(.5).setDepth(30).setAlign('center');
-    this.overlaySub = text(640, 271, '', 18).setOrigin(.5).setDepth(30).setAlign('center');
+    this.title = text(WORLD_WIDTH / 2, 65, '', 13).setOrigin(.5, 0).setDepth(21);
+    this.timer = text(WORLD_WIDTH / 2, 15, '', 36).setOrigin(.5, 0).setDepth(21);
+    this.overlay = text(WORLD_WIDTH / 2, 222, '', 55).setOrigin(.5).setDepth(30).setAlign('center');
+    this.overlaySub = text(WORLD_WIDTH / 2, 271, '', 18).setOrigin(.5).setDepth(30).setAlign('center');
     this.pickup = this.worldObject(text(0, 0, '', 13, '#ffe290').setOrigin(.5, 1).setDepth(11).setVisible(false));
-    this.abilityLabels = [512, 640, 768].map(x => text(x, 630, '', 14).setOrigin(.5, 0).setDepth(21).setAlign('center').setVisible(false));
-    this.inventoryLabel = text(640, 705, '', 13, '#fff1cb').setOrigin(.5, 1).setDepth(21).setVisible(false);
+    this.abilityLabels = [512, 640, 768].map(x => text(x, WORLD_HEIGHT - 90, '', 14).setOrigin(.5, 0).setDepth(21).setAlign('center').setVisible(false));
+    this.inventoryLabel = text(WORLD_WIDTH / 2, WORLD_HEIGHT - 12, '', 13, '#fff1cb').setOrigin(.5, 1).setDepth(21).setVisible(false);
+    const reduceMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
+    this.club = new ClubEffects(this, { width: WORLD_WIDTH, height: WORLD_HEIGHT, parent: this.world, ambient: !reduceMotion });
+    this.club.setTheme(ARENAS[this.map].particleTheme);
     for (let i = 0; i < 4; i++) {
       this.cards.push({ name: text(0, 0, '', 18).setDepth(21), info: text(0, 0, '', 14, '#d2e4ef').setDepth(21), value: text(0, 0, '', 28).setOrigin(1, 0).setDepth(21) });
     }
@@ -235,7 +243,13 @@ class ArenaScene extends Phaser.Scene {
   private chooseArena(map: MapId) {
     this.map = map;
     if (this.textures.exists(`arena-${map}`)) this.background.setTexture(`arena-${map}`).setDisplaySize(WORLD_WIDTH, WORLD_HEIGHT);
+    this.club?.setTheme(ARENAS[map].particleTheme);
   }
+  update(_time: number, delta: number) {
+    if (this.disposed || !this.club || this.simPaused || this.particleHold) return;
+    this.club.step(delta);
+  }
+  setSimPaused(paused: boolean) { this.simPaused = paused; }
   private fighter(id: string, character: CharacterId): PlayerView {
     let view = this.players.get(id);
     if (!view) {
@@ -279,16 +293,18 @@ class ArenaScene extends Phaser.Scene {
       g.fillRect(platform.x + 5, platform.y - 2, 4, 4); g.fillRect(platform.x + platform.width - 9, platform.y - 2, 4, 4);
     }
     const boundaries = snapshot?.safeZone ?? { left: arena.left, right: arena.right };
+    const stripeTop = 96;
+    const stripeBottom = arena.bottom - 8;
     for (const [index, x] of [boundaries.left, boundaries.right].entries()) {
       const active = Math.abs(x - (index === 0 ? arena.left : arena.right)) > 5;
       g.lineStyle(2, active ? 0xff657d : 0xffe096, active ? .8 : .38);
-      for (let y = arena.groundY - 112; y < arena.groundY; y += 13) g.lineBetween(x, y, x, y + 7);
+      for (let y = stripeTop; y < stripeBottom; y += 13) g.lineBetween(x, y, x, y + 7);
       g.fillStyle(active ? 0xff657d : 0xffe096, .9);
-      g.fillTriangle(x - 5, arena.groundY - 119, x + 5, arena.groundY - 119, x, arena.groundY - 111);
+      g.fillTriangle(x - 5, stripeTop - 8, x + 5, stripeTop - 8, x, stripeTop);
     }
     if (boundaries.left > arena.left + 4) {
-      g.fillStyle(0xd7335e, .10); g.fillRect(arena.left, 110, boundaries.left - arena.left, arena.groundY - 100);
-      g.fillRect(boundaries.right, 110, arena.right - boundaries.right, arena.groundY - 100);
+      g.fillStyle(0xd7335e, .10); g.fillRect(arena.left, stripeTop, boundaries.left - arena.left, stripeBottom - stripeTop);
+      g.fillRect(boundaries.right, stripeTop, arena.right - boundaries.right, stripeBottom - stripeTop);
     }
   }
   private drawItem(kind: ItemKind | string, x: number, y: number, scale = 1) {
@@ -478,9 +494,10 @@ class ArenaScene extends Phaser.Scene {
       ] as const;
       for (let i = 0; i < specs.length; i++) {
         const [binding, name, cooldown] = specs[i];
-        g.fillStyle(0x183047, .96); g.fillRect(452 + i * 128, 625, 120, 52);
-        g.lineStyle(2, cooldown > 0 ? 0x416681 : 0xf4cc66, 1); g.strokeRect(452 + i * 128, 625, 120, 52);
-        this.abilityLabels[i].setText(`${binding}  ${name}\n${cooldown > 0 ? `${Math.ceil(cooldown)} 秒` : '就绪'}`).setColor(cooldown > 0 ? '#b4c6d5' : '#f4cc66');
+        const abilityTop = WORLD_HEIGHT - 95;
+        g.fillStyle(0x183047, .96); g.fillRect(452 + i * 128, abilityTop, 120, 52);
+        g.lineStyle(2, cooldown > 0 ? 0x416681 : 0xf4cc66, 1); g.strokeRect(452 + i * 128, abilityTop, 120, 52);
+        this.abilityLabels[i].setPosition(512 + i * 128, abilityTop + 5).setText(`${binding}  ${name}\n${cooldown > 0 ? `${Math.ceil(cooldown)} 秒` : '就绪'}`).setColor(cooldown > 0 ? '#b4c6d5' : '#f4cc66');
       }
       this.inventoryLabel.setText(local.heldItem ? `${ITEM_NAMES[local.heldItem]} ×${local.ammo} · ${key('attack', 'J')} 使用 / 开火` : `${key('pickup', 'F')} 拾取道具 · ${key('attack', 'J')} 普攻`);
     }
@@ -534,6 +551,7 @@ class ArenaScene extends Phaser.Scene {
     this.previousHitStop = snapshot.hitStop;
     const visual = now < this.freezeUntil && this.frozenSnapshot ? this.frozenSnapshot : snapshot;
     if (now >= this.freezeUntil) this.frozenSnapshot = undefined;
+    this.particleHold = snapshot.hitStop > 0 || now < this.freezeUntil;
     this.drawStage(visual); this.shadows.clear(); this.effects.clear();
     this.drawObjects(visual, localId);
     this.removeMissing(new Set(visual.players.map(player => player.id)));
@@ -545,10 +563,11 @@ class ArenaScene extends Phaser.Scene {
     if (this.disposed) return;
     this.freezeUntil = 0; this.frozenSnapshot = undefined; this.previousHitStop = 0;
     this.shakeDuration = 0; this.world.setPosition(0, 0);
+    this.particleHold = false;
     this.chooseArena(map); this.drawStage(); this.shadows.clear(); this.objects.clear(); this.effects.clear(); this.hud.clear(); this.pickup.setVisible(false);
     for (const item of this.floating) item.text.destroy();
     this.floating = [];
-    this.title.setText(ARENAS[map].subtitle).setPosition(640, 25).setVisible(true); this.timer.setText('');
+    this.title.setText(ARENAS[map].subtitle).setPosition(WORLD_WIDTH / 2, 25).setVisible(true); this.timer.setText('');
     this.overlay.setVisible(false); this.overlaySub.setVisible(false);
     this.cards.forEach(card => { card.name.setVisible(false); card.info.setVisible(false); card.value.setVisible(false); });
     this.abilityLabels.forEach(label => label.setVisible(false)); this.inventoryLabel.setVisible(false);
@@ -556,15 +575,15 @@ class ArenaScene extends Phaser.Scene {
     this.removeMissing(new Set(roster.map(player => player.id)));
     for (let index = 0; index < roster.length; index++) {
       const player = roster[index]; const view = this.fighter(player.id, player.character);
-      const arena = ARENAS[map]; const x = arena.left + (arena.right - arena.left) * (index + 1) / (roster.length + 1);
-      view.sprite.setVisible(true).setTexture(`fighter-${player.character}-idle`).setPosition(Math.round(x), arena.groundY).setFlipX(index >= 2).setAlpha(1).clearTint();
+      const arena = ARENAS[map]; const spot = arena.spawns[index % arena.spawns.length];
+      view.sprite.setVisible(true).setTexture(`fighter-${player.character}-idle`).setPosition(Math.round(spot.x), spot.y).setFlipX(spot.x > WORLD_WIDTH / 2).setAlpha(1).clearTint();
       view.flashUntil = 0;
-      view.label.setVisible(true).setText(`${player.name}${player.bot ? ' · AI' : ''}`).setPosition(x, arena.groundY - 65).setColor('#fff2cc');
-      this.shadows.fillStyle(0x1c2b43, .24); this.shadows.fillEllipse(x, arena.groundY + 2, 36, 8);
+      view.label.setVisible(true).setText(`${player.name}${player.bot ? ' · AI' : ''}`).setPosition(spot.x, spot.y - 65).setColor('#fff2cc');
+      this.shadows.fillStyle(0x1c2b43, .24); this.shadows.fillEllipse(spot.x, spot.y + 2, 36, 8);
     }
     this.world.sort('depth');
   }
-  dispose() { this.disposed = true; }
+  dispose() { this.disposed = true; this.club?.destroy(); }
 }
 
 export function createRenderer(container: HTMLElement): Promise<GameRenderer> {
@@ -579,6 +598,7 @@ export function createRenderer(container: HTMLElement): Promise<GameRenderer> {
         render: (snapshot, localId) => { if (!disposed) ready.renderSnapshot(snapshot, localId); },
         preview: (map, roster) => { if (!disposed) ready.previewArena(map, roster); },
         setMuted: muted => sounds.setMuted(muted),
+        setPaused: paused => ready.setSimPaused(paused),
         shake: amount => ready.shake(amount),
         destroy: () => { if (!disposed) { disposed = true; ready.dispose(); sounds.destroy(); game.destroy(true); } },
       });

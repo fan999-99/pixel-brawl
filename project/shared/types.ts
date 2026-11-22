@@ -1,7 +1,7 @@
 export type GameMode = '1v1' | '2v2' | 'ffa';
 export type Difficulty = 'easy' | 'medium' | 'hard';
 export type CharacterId = 'uncle' | 'slipper' | 'chicken' | 'raccoon';
-export type MapId = 'sky' | 'village' | 'mountain';
+export type MapId = 'underground' | 'village' | 'undersea' | 'forest';
 export type ItemKind = 'banana' | 'shield' | 'shoes' | 'popcorn' | 'watergun';
 
 export interface InputState {
@@ -33,9 +33,15 @@ export interface RosterPlayer {
   ready: boolean;
 }
 export interface Platform { id: string; x: number; y: number; width: number; oneWay: boolean }
+export interface SpawnPoint { id: string; x: number; y: number; team: number; platformId: string }
+export interface AirdropPoint { id: string; x: number; y: number; platformId: string }
 export interface ArenaDefinition {
   id: MapId; name: string; subtitle: string; background: string;
-  left: number; right: number; groundY: number; platforms: Platform[];
+  left: number; right: number; bottom: number; groundY: number;
+  platforms: Platform[];
+  spawns: SpawnPoint[];
+  airdrops: AirdropPoint[];
+  particleTheme: string;
 }
 export interface CharacterDefinition {
   id: CharacterId; name: string; title: string; color: string; accent: string;

@@ -1,0 +1,187 @@
+{
+  "id": "village",
+  "name": "歪歪村",
+  "width": 1774,
+  "height": 887,
+  "platforms": [
+    {
+      "id": "left-ground",
+      "x": 20,
+      "y": 699,
+      "width": 389,
+      "height": 28,
+      "oneWay": false
+    },
+    {
+      "id": "main",
+      "x": 452,
+      "y": 646,
+      "width": 860,
+      "height": 42,
+      "oneWay": false
+    },
+    {
+      "id": "right-ground",
+      "x": 1350,
+      "y": 698,
+      "width": 400,
+      "height": 27,
+      "oneWay": false
+    },
+    {
+      "id": "left-stair-1",
+      "x": 164,
+      "y": 625,
+      "width": 54,
+      "height": 15,
+      "oneWay": true
+    },
+    {
+      "id": "left-stair-2",
+      "x": 210,
+      "y": 590,
+      "width": 54,
+      "height": 15,
+      "oneWay": true
+    },
+    {
+      "id": "left-stair-3",
+      "x": 254,
+      "y": 555,
+      "width": 82,
+      "height": 15,
+      "oneWay": true
+    },
+    {
+      "id": "left-balcony",
+      "x": 331,
+      "y": 537,
+      "width": 151,
+      "height": 17,
+      "oneWay": true
+    },
+    {
+      "id": "right-balcony",
+      "x": 1283,
+      "y": 537,
+      "width": 382,
+      "height": 18,
+      "oneWay": true
+    },
+    {
+      "id": "left-roof",
+      "x": 158,
+      "y": 382,
+      "width": 333,
+      "height": 18,
+      "oneWay": true
+    },
+    {
+      "id": "upper-left",
+      "x": 450,
+      "y": 328,
+      "width": 163,
+      "height": 16,
+      "oneWay": true
+    },
+    {
+      "id": "upper-right",
+      "x": 1164,
+      "y": 328,
+      "width": 162,
+      "height": 16,
+      "oneWay": true
+    },
+    {
+      "id": "bridge-left-cap",
+      "x": 548,
+      "y": 274,
+      "width": 128,
+      "height": 18,
+      "oneWay": true
+    },
+    {
+      "id": "bridge",
+      "x": 706,
+      "y": 298,
+      "width": 360,
+      "height": 18,
+      "oneWay": true
+    },
+    {
+      "id": "bridge-right-cap",
+      "x": 1097,
+      "y": 274,
+      "width": 130,
+      "height": 18,
+      "oneWay": true
+    }
+  ],
+  "spawns": [
+    {
+      "id": "P1",
+      "x": 575,
+      "y": 646,
+      "platformId": "main",
+      "team": 0
+    },
+    {
+      "id": "P2",
+      "x": 1198,
+      "y": 646,
+      "platformId": "main",
+      "team": 1
+    },
+    {
+      "id": "P3",
+      "x": 372,
+      "y": 537,
+      "platformId": "left-balcony",
+      "team": 0
+    },
+    {
+      "id": "P4",
+      "x": 1430,
+      "y": 537,
+      "platformId": "right-balcony",
+      "team": 1
+    }
+  ],
+  "airdrops": [
+    {
+      "id": "airdrop-1",
+      "x": 380,
+      "spawnY": -24,
+      "landingY": 382,
+      "platformId": "left-roof"
+    },
+    {
+      "id": "airdrop-2",
+      "x": 600,
+      "spawnY": -24,
+      "landingY": 274,
+      "platformId": "bridge-left-cap"
+    },
+    {
+      "id": "airdrop-3",
+      "x": 1175,
+      "spawnY": -24,
+      "landingY": 274,
+      "platformId": "bridge-right-cap"
+    },
+    {
+      "id": "airdrop-4",
+      "x": 1430,
+      "spawnY": -24,
+      "landingY": 537,
+      "platformId": "right-balcony"
+    }
+  ],
+  "deathBounds": {
+    "left": 0,
+    "right": 1774,
+    "bottom": 887
+  },
+  "particleTheme": "village",
+  "draft": true
+}

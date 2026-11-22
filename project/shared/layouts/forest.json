@@ -1,0 +1,155 @@
+{
+  "id": "forest",
+  "name": "歪树森林",
+  "width": 1774,
+  "height": 887,
+  "platforms": [
+    {
+      "id": "left-ground",
+      "x": 0,
+      "y": 641,
+      "width": 434,
+      "height": 28,
+      "oneWay": false
+    },
+    {
+      "id": "main",
+      "x": 525,
+      "y": 616,
+      "width": 720,
+      "height": 32,
+      "oneWay": false
+    },
+    {
+      "id": "right-ground",
+      "x": 1314,
+      "y": 578,
+      "width": 460,
+      "height": 30,
+      "oneWay": false
+    },
+    {
+      "id": "left-deck",
+      "x": 225,
+      "y": 461,
+      "width": 340,
+      "height": 18,
+      "oneWay": true
+    },
+    {
+      "id": "right-deck",
+      "x": 1380,
+      "y": 382,
+      "width": 244,
+      "height": 20,
+      "oneWay": true
+    },
+    {
+      "id": "left-step",
+      "x": 613,
+      "y": 440,
+      "width": 120,
+      "height": 20,
+      "oneWay": true
+    },
+    {
+      "id": "right-step",
+      "x": 1064,
+      "y": 440,
+      "width": 117,
+      "height": 20,
+      "oneWay": true
+    },
+    {
+      "id": "left-log",
+      "x": 605,
+      "y": 331,
+      "width": 175,
+      "height": 20,
+      "oneWay": true
+    },
+    {
+      "id": "right-log",
+      "x": 1028,
+      "y": 334,
+      "width": 175,
+      "height": 20,
+      "oneWay": true
+    },
+    {
+      "id": "top",
+      "x": 796,
+      "y": 219,
+      "width": 209,
+      "height": 24,
+      "oneWay": true
+    }
+  ],
+  "spawns": [
+    {
+      "id": "P1",
+      "x": 624,
+      "y": 616,
+      "platformId": "main",
+      "team": 0
+    },
+    {
+      "id": "P2",
+      "x": 1142,
+      "y": 616,
+      "platformId": "main",
+      "team": 1
+    },
+    {
+      "id": "P3",
+      "x": 280,
+      "y": 641,
+      "platformId": "left-ground",
+      "team": 0
+    },
+    {
+      "id": "P4",
+      "x": 1484,
+      "y": 578,
+      "platformId": "right-ground",
+      "team": 1
+    }
+  ],
+  "airdrops": [
+    {
+      "id": "airdrop-1",
+      "x": 380,
+      "spawnY": -24,
+      "landingY": 461,
+      "platformId": "left-deck"
+    },
+    {
+      "id": "airdrop-2",
+      "x": 673,
+      "spawnY": -24,
+      "landingY": 331,
+      "platformId": "left-log"
+    },
+    {
+      "id": "airdrop-3",
+      "x": 1123,
+      "spawnY": -24,
+      "landingY": 334,
+      "platformId": "right-log"
+    },
+    {
+      "id": "airdrop-4",
+      "x": 1484,
+      "spawnY": -24,
+      "landingY": 382,
+      "platformId": "right-deck"
+    }
+  ],
+  "deathBounds": {
+    "left": 0,
+    "right": 1774,
+    "bottom": 887
+  },
+  "particleTheme": "forest",
+  "draft": true
+}

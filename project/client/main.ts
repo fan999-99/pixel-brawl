@@ -515,6 +515,7 @@ function frame(now: number): void {
         return { ...p, ...position };
       }) };
     }
+    renderer.setPaused(screen === 'play' && (paused || dialogOpen()));
     renderer.render(visual, ownId());
     if (now - lastHUD > 120) { updateHUD(latest); lastHUD = now; }
   }

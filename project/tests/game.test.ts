@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { ARENAS, DEFAULT_SETTINGS, FIXED_DT, PLAYER_HEIGHT, PLAYER_WIDTH, WORLD_HEIGHT, WORLD_WIDTH } from '../shared/config.js';
-import { createGame, predictLocalPlayer, snapshotGame, stepGame } from '../shared/game.js';
+import { ARENAS, DEFAULT_SETTINGS, FIXED_DT, MAP_IDS, PLAYER_HEIGHT, PLAYER_WIDTH, WORLD_HEIGHT, WORLD_WIDTH } from '../shared/config.js';
+import { createGame, predictLocalPlayer, snapshotGame, startingSpawns, stepGame } from '../shared/game.js';
 import type { GameState } from '../shared/game.js';
 import { EMPTY_INPUT } from '../shared/types.js';
 import type { CharacterId, Difficulty, GameMode, InputState, RosterPlayer } from '../shared/types.js';
@@ -16,6 +16,11 @@ function game(mode: GameMode = 'ffa', count = mode === '1v1' ? 2 : 4, options = 
   return state;
 }
 function input(value: Partial<InputState> = {}): InputState { return { ...EMPTY_INPUT, ...value }; }
+function villageBridge() {
+  const platform = ARENAS.village.platforms.find(item => item.id === 'bridge');
+  if (!platform) throw new Error('歪歪村缺少绳桥');
+  return { platform, x: platform.x + platform.width / 2 };
+}
 function advance(state: GameState, seconds: number, inputs: Record<string, InputState> = {}): void { stepGame(state, inputs, seconds); }
 function positions(state: GameState, source = 0, target = 1): void {
   state.players.forEach((player, index) => { player.x = 1000 + index * 45; player.y = ARENAS.village.groundY; player.vx = 0; player.vy = 0; player.grounded = true; });
@@ -33,7 +38,7 @@ test('a seeded match and its snapshots are serializable, deterministic and detac
   assert.deepEqual(snapshotGame(first), snapshotGame(second));
   assert.doesNotThrow(() => JSON.stringify(first));
   const snapshot = snapshotGame(first);
-  snapshot.players[0].hp = 1; snapshot.settings.map = 'sky';
+  snapshot.players[0].hp = 1; snapshot.settings.map = 'forest';
   assert.equal(first.players[0].hp, 100); assert.equal(first.settings.map, 'village');
 });
 
@@ -125,11 +130,11 @@ test('holding jump does not repeatedly jump; two distinct presses allow exactly 
 });
 
 test('S defends on a one-way platform, S plus jump drops through it, and the main ground stays solid', () => {
-  const state = game(); const player = state.players[0];
-  player.x = 180; player.y = ARENAS.village.platforms[1].y; player.grounded = true;
+  const state = game(); const player = state.players[0]; const deck = villageBridge();
+  player.x = deck.x; player.y = deck.platform.y; player.grounded = true;
   advance(state, .12, { p0: input({ down: true }) });
-  assert.equal(player.y, ARENAS.village.platforms[1].y); assert.equal(player.blocking, true);
-  advance(state, .12, { p0: input({ down: true, jump: true }) }); assert.ok(player.y > ARENAS.village.platforms[1].y); assert.ok(player.vy > 0);
+  assert.equal(player.y, deck.platform.y); assert.equal(player.blocking, true);
+  advance(state, .12, { p0: input({ down: true, jump: true }) }); assert.ok(player.y > deck.platform.y); assert.ok(player.vy > 0);
   advance(state, .7, { p0: input({ down: true }) }); assert.equal(player.y, ARENAS.village.groundY); assert.equal(player.blocking, true);
 });
 
@@ -141,8 +146,8 @@ test('S plus jump on the main ground jumps normally and holding the combo never 
 });
 
 test('platform drop-through prediction agrees with the server after the combo is released', () => {
-  const state = game(); const player = state.players[0];
-  player.x = 180; player.y = ARENAS.village.platforms[1].y; player.grounded = true;
+  const state = game(); const player = state.players[0]; const deck = villageBridge();
+  player.x = deck.x; player.y = deck.platform.y; player.grounded = true;
   let predicted = structuredClone(player);
   for (let frame = 0; frame < 60; frame++) {
     const next = input({ down: frame < 8, jump: frame === 5 });
@@ -156,9 +161,9 @@ test('platform drop-through prediction agrees with the server after the combo is
 
 test('platform S defense mitigates frontal attacks without causing a fall', () => {
   const state = game();
-  const platform = ARENAS.village.platforms[1];
+  const deck = villageBridge(); const platform = deck.platform;
   const source = state.players[0]; const target = state.players[1];
-  source.x = 180; target.x = 228; source.y = target.y = platform.y;
+  source.x = deck.x - 24; target.x = deck.x + 24; source.y = target.y = platform.y;
   source.facing = 1; target.facing = -1;
   advance(state, .1, { p0: input({ attack: true }), p1: input({ down: true }) });
   assert.equal(target.hp, 96); assert.equal(target.stun, 0); assert.equal(target.y, platform.y);
@@ -166,11 +171,12 @@ test('platform S defense mitigates frontal attacks without causing a fall', () =
 
 test('a bot uses the new down-plus-jump combo to descend toward a grounded opponent', () => {
   const state = game('ffa', 2, { itemsEnabled: false });
-  state.players[0].x = 180;
+  const deck = villageBridge();
+  state.players[0].x = deck.x; state.players[0].y = ARENAS.village.groundY;
   const bot = state.players[1]; bot.bot = true; bot.difficulty = 'hard';
-  bot.x = 180; bot.y = ARENAS.village.platforms[1].y; bot.grounded = true;
+  bot.x = deck.x; bot.y = deck.platform.y; bot.grounded = true;
   advance(state, .25);
-  assert.ok(bot.y > ARENAS.village.platforms[1].y + 15); assert.ok(bot.vy > 0);
+  assert.ok(bot.y > deck.platform.y + 15); assert.ok(bot.vy > 0);
 });
 
 test('local prediction uses the same jump and movement collision as authoritative simulation and acknowledges inputs', () => {
@@ -354,21 +360,27 @@ test('holding K starts one dash only and movement prediction agrees through the 
   assert.equal(predicted.cd.dash, 0);
 });
 
-test('a hard bot climbs intermediate platforms to pursue a player on the sky arena top platform', () => {
-  const state = createGame({ ...DEFAULT_SETTINGS, map: 'sky', mode: 'ffa', itemsEnabled: false }, roster(2), 5522);
-  state.phase = 'playing'; state.players[0].x = 640; state.players[0].y = 153; state.players[0].grounded = true;
-  state.players[1].bot = true; state.players[1].difficulty = 'hard'; state.players[1].x = 930;
+test('a hard bot climbs intermediate platforms to pursue a player on the forest top platform', () => {
+  const state = createGame({ ...DEFAULT_SETTINGS, map: 'forest', mode: 'ffa', itemsEnabled: false }, roster(2), 5522);
+  const top = ARENAS.forest.platforms.find(platform => platform.id === 'top')!;
+  const main = ARENAS.forest.platforms.find(platform => platform.id === 'main')!;
+  state.phase = 'playing';
+  state.players[0].x = top.x + top.width / 2; state.players[0].y = top.y; state.players[0].grounded = true;
+  state.players[1].bot = true; state.players[1].difficulty = 'hard';
+  state.players[1].x = main.x + main.width / 2; state.players[1].y = main.y; state.players[1].grounded = true;
   let reached = false;
-  for (let frame = 0; frame < 720; frame++) {
+  for (let frame = 0; frame < 900; frame++) {
     stepGame(state, {});
     const bot = state.players[1];
-    if (bot.x > 520 && bot.x < 760 && bot.y < 175) { reached = true; break; }
+    if (bot.x > top.x && bot.x < top.x + top.width && bot.y <= top.y + 2) { reached = true; break; }
   }
   assert.equal(reached, true, `bot ended at ${state.players[1].x.toFixed(1)},${state.players[1].y.toFixed(1)}`);
 });
 
 test('FFA never shrinks its arena or applies safe-zone damage in the final seconds', () => {
-  const state = game('ffa'); state.timeLeft = 1; state.players[0].x = ARENAS.village.left + 16;
+  const state = game('ffa'); state.timeLeft = 1;
+  const main = ARENAS.village.platforms.find(platform => platform.id === 'main')!;
+  state.players[0].x = main.x + main.width / 2; state.players[0].y = main.y; state.players[0].grounded = true;
   advance(state, .9);
   assert.deepEqual(state.safeZone, { left: ARENAS.village.left, right: ARENAS.village.right });
   assert.equal(state.players[0].hp, 100);
@@ -475,14 +487,14 @@ test('a shared heavy impact on several targets takes one six-frame stop rather t
 });
 
 test('an S plus Space tap during hit-stop is preserved as a platform drop rather than a jump', () => {
-  const state = game(); const player = state.players[2];
-  player.x = 180; player.y = ARENAS.village.platforms[1].y; player.grounded = true;
+  const state = game(); const player = state.players[2]; const deck = villageBridge();
+  player.x = deck.x; player.y = deck.platform.y; player.grounded = true;
   state.hitStop = 3 * FIXED_DT;
   stepGame(state, { p2: input({ down: true, jump: true, seq: 1 }) });
   stepGame(state, { p2: input({ seq: 2 }) }); stepGame(state, { p2: input({ seq: 3 }) });
-  assert.equal(state.hitStop, 0); assert.equal(player.y, ARENAS.village.platforms[1].y);
+  assert.equal(state.hitStop, 0); assert.equal(player.y, deck.platform.y);
   stepGame(state, { p2: input({ seq: 4 }) });
-  assert.ok(player.y > ARENAS.village.platforms[1].y); assert.ok(player.vy > 0); assert.equal(player.jumpsLeft, 2);
+  assert.ok(player.y > deck.platform.y); assert.ok(player.vy > 0); assert.equal(player.jumpsLeft, 2);
   advance(state, .4); assert.equal(player.blocking, false);
 });
 
@@ -498,15 +510,17 @@ test('idle animation time starts after two seconds of grounded inactivity and re
 });
 
 test('players can leave platforms and die beyond the map bounds even with invulnerability', () => {
-  for (const map of ['sky', 'village', 'mountain'] as const) {
+  for (const map of MAP_IDS) {
     const state = game('ffa', 2, { map, itemsEnabled: false });
-    const player = state.players[0]; player.x = ARENAS[map].platforms[0].x + ARENAS[map].platforms[0].width - 4;
-    player.invuln = 10;
-    advance(state, 1.5, { p0: input({ move: 1 }) });
-    assert.equal(player.dead, true); assert.equal(player.hp, 0); assert.equal(player.deaths, 1); assert.equal(player.score, -1);
+    const edge = [...ARENAS[map].platforms].sort((a, b) => (b.x + b.width) - (a.x + a.width))[0];
+    const player = state.players[0];
+    player.x = edge.x + edge.width - 8; player.y = edge.y; player.grounded = true; player.invuln = 10;
+    advance(state, 2, { p0: input({ move: 1 }) });
+    assert.equal(player.dead, true, map); assert.equal(player.hp, 0); assert.equal(player.deaths, 1); assert.equal(player.score, -1);
   }
   const falling = game(); const target = falling.players[1];
-  target.x = 5; target.y = WORLD_HEIGHT + PLAYER_HEIGHT + 1; target.invuln = 10;
+  target.x = ARENAS.village.groundY > 0 ? ARENAS.village.spawns[0].x : 5;
+  target.y = WORLD_HEIGHT + PLAYER_HEIGHT + 1; target.invuln = 10;
   stepGame(falling, {}); assert.equal(target.dead, true);
   const horizontal = game(); horizontal.players[1].x = WORLD_WIDTH + PLAYER_WIDTH / 2 + 1;
   stepGame(horizontal, {}); assert.equal(horizontal.players[1].dead, true);
@@ -528,4 +542,40 @@ test('popcorn starts its .8 second, radius-105 warning only after landing and th
   advance(state, .75); assert.equal(state.players[1].hp, 100); assert.ok(state.projectiles.some(shot => shot.id === bomb.id));
   advance(state, .07); assert.equal(state.players[1].hp, 88); assert.ok(!state.projectiles.some(shot => shot.id === bomb.id));
   assert.equal(state.effects.find(effect => effect.kind === 'explosion')?.radius, 105);
+});
+
+test('each new arena spawns on its authored points and air drops land on those platforms', () => {
+  for (const map of MAP_IDS) {
+    const arena = ARENAS[map];
+    assert.equal(arena.left, 0); assert.equal(arena.right, WORLD_WIDTH); assert.equal(arena.bottom, WORLD_HEIGHT);
+    assert.equal(arena.spawns.length, 4); assert.equal(arena.airdrops.length, 4);
+    const duel = createGame({ ...DEFAULT_SETTINGS, mode: '1v1', map, itemsEnabled: false }, roster(2), 7);
+    assert.deepEqual(duel.players.map(player => ({ x: player.x, y: player.y })), startingSpawns(map, '1v1', [0, 1], 1).map(spot => ({ x: spot.x, y: spot.y })));
+    duel.phase = 'playing';
+    advance(duel, .2);
+    for (const player of duel.players) assert.equal(player.grounded, true, `${map} ${player.id}`);
+    const teams = createGame({ ...DEFAULT_SETTINGS, mode: '2v2', map, itemsEnabled: false }, roster(4), 7);
+    assert.deepEqual(teams.players.map(player => player.x), startingSpawns(map, '2v2', [0, 0, 1, 1]).map(spot => spot.x));
+    const drops = game('ffa', 4, { map, dropInterval: 5 });
+    advance(drops, 5.05);
+    assert.equal(drops.items.length, 4);
+    for (const item of drops.items) {
+      const column = arena.airdrops.find(drop => drop.x === item.x);
+      assert.ok(column, `${map} drop x ${item.x}`);
+      assert.equal(item.landed, false);
+    }
+    advance(drops, 2);
+    for (const item of drops.items) {
+      const column = arena.airdrops.find(drop => drop.x === item.x)!;
+      assert.equal(item.landed, true, map);
+      assert.equal(item.y + 9, column.y);
+    }
+  }
+  const swapped = createGame({ ...DEFAULT_SETTINGS, mode: '1v1', map: 'underground' }, roster(2), 3);
+  swapped.phase = 'playing'; swapped.players[1].dead = true;
+  stepGame(swapped, {});
+  advance(swapped, 3.05);
+  assert.equal(swapped.round, 2);
+  assert.equal(swapped.players[0].x, ARENAS.underground.spawns[1].x);
+  assert.equal(swapped.players[1].x, ARENAS.underground.spawns[0].x);
 });

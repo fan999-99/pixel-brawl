@@ -1,6 +1,6 @@
-import { ARENAS, CHARACTERS, DEFAULT_SETTINGS, FIXED_DT, ITEM_NAMES, PLAYER_HEIGHT, PLAYER_WIDTH, WORLD_HEIGHT, WORLD_WIDTH } from './config.js';
+import { ARENAS, CHARACTERS, DEFAULT_SETTINGS, FIXED_DT, ITEM_NAMES, PLAYER_HEIGHT, PLAYER_WIDTH, WORLD_WIDTH } from './config.js';
 import { EMPTY_INPUT } from './types.js';
-import type { GameEvent, GameSnapshot, InputState, ItemKind, MatchSettings, PlayerSnapshot, ProjectileSnapshot, RosterPlayer } from './types.js';
+import type { GameEvent, GameMode, GameSnapshot, InputState, ItemKind, MapId, MatchSettings, PlayerSnapshot, ProjectileSnapshot, RosterPlayer } from './types.js';
 
 /** Feet coordinates: x is the centre, y is the bottom of a 32 x 50 collider. */
 const SPEED = 265;
@@ -73,9 +73,37 @@ function effect(state: GameState, kind: string, x: number, y: number, radius: nu
 function memory(): PlayerMemory {
   return { previous: { ...EMPTY_INPUT }, attackCooldown: 0, comboUntil: 0, guard: 0, guardShield: 0, itemShield: 0, itemShieldTime: 0, slide: 0, slideHits: [], controlTotal: 0, controlWindow: 0, botThink: 0, botInput: { ...EMPTY_INPUT }, botSkillChoice: 0, botPlatform: 'ground', botGoal: null, bufferedInput: { ...EMPTY_INPUT } };
 }
-function spawnX(state: GameState, index: number): number {
-  const arena = ARENAS[state.settings.map];
-  return arena.left + (arena.right - arena.left) * (index + 1) / (state.players.length + 1);
+/** 1v1 uses P1/P2 and swaps sides each new round. 2v2 keeps teams on their two points. FFA uses the points in order. */
+export function startingSpawns(map: MapId, mode: GameMode, teams: number[], round = 1): { x: number; y: number }[] {
+  const spawns = ARENAS[map].spawns.map(spawn => ({ x: spawn.x, y: spawn.y, team: spawn.team }));
+  if (mode === '1v1') {
+    const pair = round % 2 === 0 ? [spawns[1], spawns[0]] : [spawns[0], spawns[1]];
+    return teams.map((_, index) => pair[Math.min(index, pair.length - 1)]);
+  }
+  if (mode === '2v2') {
+    const pools = new Map<number, { x: number; y: number; team: number }[]>();
+    for (const spawn of spawns) {
+      const list = pools.get(spawn.team) ?? [];
+      list.push(spawn);
+      pools.set(spawn.team, list);
+    }
+    const cursor = new Map<number, number>();
+    return teams.map(team => {
+      const list = pools.get(team) ?? spawns;
+      const index = cursor.get(team) ?? 0;
+      cursor.set(team, index + 1);
+      return list[index % list.length];
+    });
+  }
+  return teams.map((_, index) => spawns[index % spawns.length]);
+}
+function placePlayers(state: GameState): void {
+  const spots = startingSpawns(state.settings.map, state.settings.mode, state.players.map(player => player.team), state.round);
+  state.players.forEach((player, index) => {
+    player.x = spots[index].x;
+    player.y = spots[index].y;
+    player.facing = player.x < WORLD_WIDTH / 2 ? 1 : -1;
+  });
 }
 function makePlayer(roster: RosterPlayer): PlayerSnapshot {
   return {
@@ -103,11 +131,8 @@ export function createGame(settings: MatchSettings, roster: RosterPlayer[], seed
     rng: (seed >>> 0) || 1, entityId: 0, eventId: 0, phaseTimer: 3,
     roster: participants, memory: {}, damageLedger: {}, pending: [],
   };
-  state.players.forEach((player, index) => {
-    player.x = spawnX(state, index); player.y = ARENAS[normalized.map].groundY;
-    player.facing = player.x < 640 ? 1 : -1;
-    state.memory[player.id] = memory(); state.damageLedger[player.id] = {};
-  });
+  placePlayers(state);
+  state.players.forEach(player => { state.memory[player.id] = memory(); state.damageLedger[player.id] = {}; });
   return state;
 }
 
@@ -382,12 +407,15 @@ function pickup(state: GameState, player: PlayerSnapshot): void {
 function planDrop(state: GameState): void {
   const arena = ARENAS[state.settings.map];
   const count = state.players.length;
-  for (let index = 0; index < count; index++) {
+  const columns = [...arena.airdrops];
+  for (let index = columns.length - 1; index > 0; index--) {
+    const swap = Math.floor(random(state) * (index + 1));
+    [columns[index], columns[swap]] = [columns[swap], columns[index]];
+  }
+  for (const drop of columns.slice(0, count)) {
     const kind = ITEM_KINDS[Math.floor(random(state) * ITEM_KINDS.length)];
-    const section = (index + .25 + random(state) * .5) / count;
-    const x = arena.left + 35 + section * (arena.right - arena.left - 70);
-    const platform = [...arena.platforms].sort((a, b) => a.y - b.y).find(surface => x >= surface.x && x <= surface.x + surface.width)!;
-    state.dropWarnings.push({ id: nextId(state, 'drop'), kind, x, y: platform.y, inSeconds: Math.max(0, state.dropIn) });
+    const platform = arena.platforms.find(surface => surface.id === drop.platformId);
+    state.dropWarnings.push({ id: nextId(state, 'drop'), kind, x: drop.x, y: platform?.y ?? drop.y, inSeconds: Math.max(0, state.dropIn) });
   }
 }
 function dropItems(state: GameState): void {
@@ -452,7 +480,7 @@ function updateProjectiles(state: GameState, dt: number): void {
         return false;
       }
     }
-    return shot.x > arena.left - 120 && shot.x < arena.right + 120 && shot.y < 850;
+    return shot.x > arena.left - 120 && shot.x < arena.right + 120 && shot.y < arena.bottom + 160;
   });
 }
 
@@ -521,10 +549,10 @@ function resetRound(state: GameState): void {
   state.players = state.players.map((old, index) => {
     const fresh = makePlayer({ ...state.roster[index], bot: old.bot, difficulty: old.difficulty });
     Object.assign(fresh, { kills: old.kills, deaths: old.deaths, assists: old.assists, damage: old.damage, score: old.score });
-    fresh.x = spawnX(state, index); fresh.y = ARENAS[state.settings.map].groundY; fresh.facing = fresh.x < 640 ? 1 : -1;
     state.memory[fresh.id] = memory(); state.damageLedger[fresh.id] = {};
     return fresh;
   });
+  placePlayers(state);
 }
 function finishRound(state: GameState, team: number | null): void {
   if (state.phase !== 'playing') return;
@@ -557,10 +585,10 @@ function evaluateRound(state: GameState): void {
 }
 function respawn(state: GameState, player: PlayerSnapshot): void {
   const arena = ARENAS[state.settings.map];
-  const candidates = [.18, .36, .64, .82].map(ratio => arena.left + ratio * (arena.right - arena.left));
   const alive = state.players.filter(other => other.id !== player.id && !other.dead);
-  candidates.sort((a, b) => Math.min(...alive.map(other => Math.abs(b - other.x)), 2000) - Math.min(...alive.map(other => Math.abs(a - other.x)), 2000));
-  player.x = clamp(candidates[0], state.safeZone.left + 20, state.safeZone.right - 20); player.y = arena.groundY;
+  const distance = (x: number, y: number) => Math.min(...alive.map(other => Math.hypot(x - other.x, y - other.y)), 4000);
+  const spot = [...arena.spawns].sort((a, b) => distance(b.x, b.y) - distance(a.x, a.y))[0];
+  player.x = clamp(spot.x, state.safeZone.left + 20, state.safeZone.right - 20); player.y = spot.y;
   player.hp = player.maxHp; player.dead = false; player.respawnIn = 0; player.invuln = 1;
   player.vx = 0; player.vy = 0; player.grounded = true; player.jumpsLeft = 2; player.jumpLatch = false; player.dropThrough = 0;
   player.controlProtection = 0; player.stun = 0; player.blocking = false; player.shield = 0;
@@ -614,7 +642,8 @@ function tickPlayer(state: GameState, player: PlayerSnapshot, input: InputState,
     else if (input.attack) doAttack(state, player, input);
   }
   movePlayer(player, input, dt, state.settings, player.dropThrough ?? 0, mem.guard > 0, mem.slide > 0);
-  if (player.x < -PLAYER_WIDTH / 2 || player.x > WORLD_WIDTH + PLAYER_WIDTH / 2 || player.y > WORLD_HEIGHT + PLAYER_HEIGHT) {
+  const bounds = ARENAS[state.settings.map];
+  if (player.x < bounds.left || player.x > bounds.right || player.y > bounds.bottom) {
     knockOut(state, player); mem.previous = { ...input }; return;
   }
   if (mem.slide > 0) {
